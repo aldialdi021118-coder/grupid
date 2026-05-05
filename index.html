@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database Grup</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #f4f6fa;
+  color: #1a1d27;
+  min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid #e5e9f0;
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.topbar-left { display: flex; align-items: center; gap: 9px; }
+.logo-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, #4f7cff, #7c4fff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.logo-title { font-size: 14px; font-weight: 800; color: #1a1d27; }
+.logo-sub   { font-size: 9px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; }
+.topbar-right { display: flex; gap: 7px; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 12px; border-radius: 8px; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  transition: all .15s; white-space: nowrap;
+}
+.btn-primary { background: #4f7cff; color: #fff; }
+.btn-primary:hover { background: #3a66e8; }
+.btn-ghost { background: transparent; color: #8a94a6; border: 1px solid #e5e9f0; }
+.btn-ghost:hover { border-color: #4f7cff; color: #4f7cff; background: #f0f4ff; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* STATUS */
+#statusbar {
+  display: none; margin: 10px 12px 0;
+  padding: 8px 12px; border-radius: 8px;
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  align-items: center; gap: 7px;
+}
+#statusbar.show    { display: flex; }
+#statusbar.loading { background: #eef2ff; color: #4f7cff; border: 1px solid #c7d4ff; }
+#statusbar.ok      { background: #e8f8f0; color: #1db56a; border: 1px solid #b8e8ce; }
+#statusbar.error   { background: #fff1f2; color: #e53e3e; border: 1px solid #fcc; }
+
+/* WRAP */
+.wrap { max-width: 760px; margin: 0 auto; padding: 12px 12px 50px; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
+.stat {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 10px;
+  padding: 9px 10px; text-align: center;
+}
+.stat-v { font-size: 20px; font-weight: 800; line-height: 1; }
+.stat-v.gold  { color: #f5a623; }
+.stat-v.blue  { color: #4f7cff; }
+.stat-v.green { color: #1db56a; }
+.stat-l { font-size: 9px; color: #8a94a6; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+
+/* TOOLBAR */
+.toolbar { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1; min-width: 150px; }
+.search-wrap::before { content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 12px; }
+.search-wrap input {
+  width: 100%; background: #fff; border: 1px solid #e5e9f0; border-radius: 8px;
+  padding: 8px 12px 8px 32px; font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1d27;
+}
+.search-wrap input:focus { outline: none; border-color: #4f7cff; }
+.akun-sel {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 8px;
+  padding: 8px 12px; font-size: 12px; color: #1a1d27;
+  font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer;
+  max-width: 160px;
+}
+.akun-sel:focus { outline: none; border-color: #4f7cff; }
+
+/* AKUN CARD */
+.akun-card {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 12px;
+  margin-bottom: 10px; overflow: hidden;
+}
+.akun-hdr {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 12px; background: #f8faff;
+  border-bottom: 1px solid #eef1f8;
+}
+.akun-ava {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: linear-gradient(135deg, #ff7c4f, #ff4fa0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.akun-info { flex: 1; min-width: 0; }
+.akun-name { font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.akun-sub  { font-size: 10px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; }
+.badges { display: flex; gap: 4px; flex-wrap: wrap; }
+.badge {
+  font-size: 9px; padding: 2px 6px; border-radius: 20px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-fp    { background: #eef2ff; color: #4f7cff; }
+.badge-utama { background: #fff5eb; color: #f5a623; }
+.badge-cnt   { background: #e8f8f0; color: #1db56a; }
+
+/* CITY ROW */
+.city-block { border-bottom: 1px solid #f0f3f9; }
+.city-block:last-child { border-bottom: none; }
+.city-hdr {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 12px; cursor: pointer;
+  transition: background .1s; user-select: none;
+  position: relative;
+}
+.city-hdr:hover { background: #f8faff; }
+.city-name { flex: 1; font-size: 12px; font-weight: 700; color: #3a4060; }
+
+/* ── Jumlah grup — warna gelap biar kelihatan ── */
+.city-cnt {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  background: #eef1f8; color: #3a4060;
+  border: 1px solid #d0d8ec; padding: 1px 7px; border-radius: 20px;
+  font-weight: 700;
+}
+
+/* ── Copy button (dropdown trigger) ── */
+.copy-city-btn {
+  font-size: 10px; padding: 4px 10px; border-radius: 6px;
+  background: #eef2ff; color: #4f7cff; border: 1px solid #c7d4ff;
+  cursor: pointer; font-weight: 700; transition: all .15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex; align-items: center; gap: 3px;
+}
+.copy-city-btn:hover  { background: #4f7cff; color: #fff; border-color: #4f7cff; }
+.copy-city-btn.copied { background: #1db56a; color: #fff; border-color: #1db56a; }
+.copy-city-btn .chevron { font-size: 8px; opacity: .7; }
+
+/* ── Dropdown copy menu ── */
+.copy-menu {
+  position: fixed;
+  background: #fff;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+  z-index: 500;
+  min-width: 220px;
+  overflow: hidden;
+  animation: menuIn .12s ease;
+}
+@keyframes menuIn {
+  from { opacity:0; transform: translateY(-4px) scale(.98); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.copy-menu-item {
+  padding: 9px 13px; font-size: 11px; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;
+  color: #3a4060; transition: background .1s;
+  display: flex; align-items: center; gap: 6px;
+}
+.copy-menu-item:hover { background: #f0f4ff; color: #4f7cff; }
+.copy-menu-item.all   { background: #f8faff; font-weight: 700; color: #1a1d27; border-bottom: 1px solid #eef1f8; }
+.copy-menu-item.all:hover { background: #4f7cff; color: #fff; }
+.copy-menu-divider { height: 1px; background: #f0f3f9; }
+
+/* range input area */
+.copy-range-box {
+  padding: 10px 12px 12px;
+  border-top: 1px solid #eef1f8;
+  background: #fafbff;
+}
+.copy-range-label {
+  font-size: 10px; font-weight: 700; color: #8a94a6;
+  text-transform: uppercase; letter-spacing: .04em;
+  margin-bottom: 7px;
+}
+.copy-range-inputs {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 8px;
+}
+.copy-range-inputs input {
+  width: 0; flex: 1;
+  border: 1px solid #d0d8ec; border-radius: 7px;
+  padding: 6px 8px; font-size: 12px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: #1a1d27; background: #fff; text-align: center;
+  outline: none; transition: border .15s;
+}
+.copy-range-inputs input:focus { border-color: #4f7cff; box-shadow: 0 0 0 2px #dce7ff; }
+.copy-range-inputs .sep { font-size: 11px; color: #b0b8c8; font-weight: 700; flex-shrink: 0; }
+.copy-range-hint { font-size: 10px; color: #b0b8c8; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px; }
+.copy-range-go {
+  width: 100%; padding: 7px; border-radius: 7px;
+  background: #4f7cff; color: #fff; border: none;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background .15s;
+}
+.copy-range-go:hover { background: #3a66e8; }
+
+.city-arrow { font-size: 10px; color: #c0c8d8; transition: transform .2s; flex-shrink: 0; }
+.city-hdr.open .city-arrow { transform: rotate(180deg); }
+
+/* GROUP ITEMS */
+.group-items { display: none; }
+.group-items.open { display: block; }
+
+.group-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 12px 6px 28px;
+  border-bottom: 1px solid #f7f8fc;
+  transition: background .1s;
+}
+.group-item:last-child { border-bottom: none; }
+.group-item:hover { background: #f8faff; }
+.g-num {
+  font-size: 10px; color: #c0c8d8; font-family: 'JetBrains Mono', monospace;
+  min-width: 22px; flex-shrink: 0;
+}
+.g-name {
+  flex: 1; font-size: 11px; color: #3a4060;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.g-name mark { background: #d6e4ff; color: #2d5be3; border-radius: 2px; padding: 0 1px; }
+.g-id {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: #8a94a6; background: #f4f6fa; border: 1px solid #e5e9f0;
+  padding: 3px 8px; border-radius: 6px; cursor: pointer;
+  transition: all .15s; white-space: nowrap; flex-shrink: 0; user-select: none;
+}
+.g-id:hover  { background: #eef2ff; color: #4f7cff; border-color: #c7d4ff; }
+.g-id.copied { background: #e8f8f0; color: #1db56a; border-color: #b8e8ce; }
+
+/* EMPTY */
+.empty { text-align: center; padding: 50px 20px; color: #8a94a6; font-size: 13px; }
+.empty .ico { font-size: 38px; margin-bottom: 8px; }
+.empty small { display: block; margin-top: 4px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #b0b8c8; }
+
+/* TOAST */
+#toast {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(8px);
+  background: #1a1d27; color: #fff; font-size: 12px;
+  padding: 8px 18px; border-radius: 20px; font-family: 'JetBrains Mono', monospace;
+  opacity: 0; transition: all .2s; pointer-events: none; z-index: 999; white-space: nowrap;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media(max-width:480px) {
+  .akun-sel { max-width: 110px; font-size: 11px; }
+  .stat-v { font-size: 17px; }
+  .group-item { padding-left: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-icon">🗂️</div>
+    <div>
+      <div class="logo-title">Database Grup</div>
+      <div class="logo-sub">id grup scanner</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="btn btn-ghost" id="export-btn" style="display:none" onclick="exportData()">⬇ JSON</button>
+    <button class="btn btn-primary" id="load-btn" onclick="loadAllGroups()">↻ Refresh</button>
+  </div>
+</div>
+
+<div id="statusbar"><span id="status-ico"></span><span id="status-text"></span></div>
+
+<div class="wrap">
+  <div class="stats" id="stats" style="display:none">
+    <div class="stat"><div class="stat-v gold" id="s-akun">0</div><div class="stat-l">Akun</div></div>
+    <div class="stat"><div class="stat-v blue" id="s-kota">0</div><div class="stat-l">Kota</div></div>
+    <div class="stat"><div class="stat-v green" id="s-grup">0</div><div class="stat-l">Grup</div></div>
+  </div>
+
+  <div class="toolbar" id="toolbar" style="display:none">
+    <div class="search-wrap">
+      <input type="text" id="search-inp" placeholder="Cari nama atau ID grup..." oninput="onSearch()">
+    </div>
+    <select class="akun-sel" id="akun-sel" onchange="render(); updateStats()">
+      <option value="">Semua Akun</option>
+    </select>
+  </div>
+
+  <div id="content">
+    <div class="empty">
+      <div class="ico">⏳</div>
+      Menghubungkan ke Firebase...
+      <small>Mohon tunggu sebentar</small>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const FIREBASE_URL   = 'https://grupid-default-rtdb.firebaseio.com';
+const FIREBASE_TOKEN = '';
+
+let _data   = {};
+let _search = '';
+const _cityIds = {};   // blockId → array of IDs (urut)
+
+/* ── STATUS ── */
+function setStatus(msg, type) {
+  const bar = document.getElementById('statusbar');
+  bar.className = 'show ' + type;
+  document.getElementById('status-ico').textContent  = type==='loading'?'⏳ ':type==='ok'?'✅ ':'❌ ';
+  document.getElementById('status-text').textContent = msg;
+  if (type !== 'loading') setTimeout(() => bar.className = '', 3000);
+}
+
+/* ── LOAD ── */
+async function loadAllGroups() {
+  const btn = document.getElementById('load-btn');
+  btn.disabled = true; btn.textContent = '⏳';
+  setStatus('Memuat dari Firebase...', 'loading');
+  const auth = FIREBASE_TOKEN ? '?auth=' + FIREBASE_TOKEN : '';
+  try {
+    const res = await fetch(FIREBASE_URL + '/fewfeed_groups.json' + auth);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const raw = await res.json();
+    if (!raw || !Object.keys(raw).length) {
+      setStatus('Belum ada data grup. Lakukan scan dulu.', 'error');
+      document.getElementById('content').innerHTML =
+        `<div class="empty"><div class="ico">🔍</div>Belum ada data<small>Jalankan scan di extension terlebih dahulu</small></div>`;
+      return;
+    }
+    _data = raw;
+    buildFilter(); render(); updateStats();
+    document.getElementById('stats').style.display    = '';
+    document.getElementById('toolbar').style.display  = '';
+    document.getElementById('export-btn').style.display = '';
+    setStatus(Object.keys(raw).length + ' akun berhasil dimuat', 'ok');
+  } catch(e) {
+    setStatus('Gagal: ' + e.message, 'error');
+    document.getElementById('content').innerHTML =
+      `<div class="empty"><div class="ico">🚫</div>Gagal konek Firebase<small>${e.message}</small></div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = '↻ Refresh';
+  }
+}
+
+/* ── FILTER ── */
+function buildFilter() {
+  const sel = document.getElementById('akun-sel');
+  sel.innerHTML = '<option value="">Semua Akun</option>';
+  Object.entries(_data).forEach(([k, d]) => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = (d.namaAkun||k) + (d.subAkun ? ' / '+d.subAkun : '');
+    sel.appendChild(o);
+  });
+}
+function onSearch() {
+  _search = document.getElementById('search-inp').value.trim().toLowerCase();
+  render(); updateStats();
+}
+
+/* ── HELPERS ── */
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* hl() — highlight keyword tapi tetap render emoji dengan benar */
+function hl(s, kw) {
+  const e = esc(s);
+  if (!kw) return e;
+  return e.replace(new RegExp('('+kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
+}
+
+/* ── RENDER ── */
+function render() {
+  const sel = document.getElementById('akun-sel').value;
+  const kw  = _search;
+  let html  = '';
+
+  Object.keys(_cityIds).forEach(k => delete _cityIds[k]);
+
+  Object.entries(_data).forEach(([key, d]) => {
+    if (sel && key !== sel) return;
+    const cities = d.cities || {};
+
+    const filtCities = Object.entries(cities).map(([city, groups]) => ({
+      city,
+      groups: (groups||[]).filter(g =>
+        !kw || (g.name||'').toLowerCase().includes(kw) || (g.id||'').toLowerCase().includes(kw)
+      )
+    })).filter(c => c.groups.length > 0)
+      .sort((a,b) => b.groups.length - a.groups.length);
+
+    if (!filtCities.length && kw) return;
+
+    const total = filtCities.reduce((s,c) => s + c.groups.length, 0);
+
+    html += `<div class="akun-card">
+      <div class="akun-hdr">
+        <div class="akun-ava">${esc(d.namaAkun||'?').charAt(0).toUpperCase()}</div>
+        <div class="akun-info">
+          <div class="akun-name">👤 ${esc(d.namaAkun||key)}</div>
+          <div class="akun-sub">${d.subAkun ? '📁 FP: '+esc(d.subAkun) : '🏠 Akun Utama'}</div>
+        </div>
+        <div class="badges">
+          <span class="badge ${d.subAkun?'badge-fp':'badge-utama'}">${d.subAkun?'FP':'Utama'}</span>
+          <span class="badge badge-cnt">⚡${total}</span>
+        </div>
+      </div>`;
+
+    filtCities.forEach((c, ci) => {
+      const blockId = 'b_' + key.replace(/\W/g,'_') + '_' + ci;
+      const cityLbl = c.city.charAt(0).toUpperCase() + c.city.slice(1);
+
+      // Simpan array ID (urut sesuai index)
+      _cityIds[blockId] = c.groups.map(g => g.id||'').filter(Boolean);
+
+      html += `<div class="city-block">
+        <div class="city-hdr" id="hdr_${blockId}" onclick="toggleCity('${blockId}')">
+          <span>📍</span>
+          <span class="city-name">${esc(cityLbl)}</span>
+          <span class="city-cnt">${c.groups.length} grup</span>
+          <button class="copy-city-btn" id="copybtn_${blockId}"
+            onclick="event.stopPropagation(); showCopyMenu('${blockId}', ${c.groups.length}, event)">
+            📋 Copy <span class="chevron">▾</span>
+          </button>
+          <span class="city-arrow">▶</span>
+        </div>
+        <div class="group-items" id="${blockId}">`;
+
+      c.groups.forEach((g, idx) => {
+        const sid = g.id || '—';
+        const uid = 'id_' + Math.random().toString(36).slice(2,8);
+        html += `<div class="group-item">
+          <span class="g-num">${idx+1}</span>
+          <span class="g-name" title="${esc(g.name)}">${hl(g.name||'—', kw)}</span>
+          <span class="g-id" id="${uid}"
+            onclick="copyOneId(this, '${esc(sid)}')">${hl(sid, kw)}</span>
+        </div>`;
+      });
+
+      html += `</div></div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  document.getElementById('content').innerHTML = html ||
+    `<div class="empty"><div class="ico">🔎</div>Tidak ada hasil<small>Coba kata kunci lain</small></div>`;
+}
+
+/* ── STATS ── */
+function updateStats() {
+  const sel = document.getElementById('akun-sel').value;
+  let a=0, k=0, g=0;
+  Object.entries(_data).forEach(([key,d]) => {
+    if (sel && key!==sel) return;
+    a++; const c = d.cities||{};
+    k += Object.keys(c).length;
+    Object.values(c).forEach(grp => g += (grp||[]).length);
+  });
+  document.getElementById('s-akun').textContent = a;
+  document.getElementById('s-kota').textContent = k;
+  document.getElementById('s-grup').textContent = g;
+}
+
+/* ── TOGGLE KOTA ── */
+function toggleCity(blockId) {
+  const block = document.getElementById(blockId);
+  const hdr   = document.getElementById('hdr_' + blockId);
+  if (!block || !hdr) return;
+  const isOpen = block.classList.toggle('open');
+  hdr.classList.toggle('open', isOpen);
+}
+
+/* ── SHOW COPY MENU (custom range) ── */
+function showCopyMenu(blockId, total, event) {
+  event.stopPropagation();
+  closeAllMenus();
+
+  const btn  = document.getElementById('copybtn_' + blockId);
+  const rect = btn.getBoundingClientRect();
+
+  const menu = document.createElement('div');
+  menu.className = 'copy-menu';
+  menu.dataset.menu = 'copy';
+
+  // Posisi di bawah tombol, jaga agar tidak keluar layar
+  const menuWidth = 220;
+  let topPos   = rect.bottom + 5;
+  let rightPos = window.innerWidth - rect.right;
+  if (rightPos + menuWidth > window.innerWidth) rightPos = 4;
+  menu.style.top   = topPos + 'px';
+  menu.style.right = rightPos + 'px';
+
+  // ── Copy Semua ──
+  const allItem = document.createElement('div');
+  allItem.className = 'copy-menu-item all';
+  allItem.innerHTML = `📋 Copy Semua <strong>(${total})</strong>`;
+  allItem.onclick = (e) => {
+    e.stopPropagation();
+    copyCityRange(blockId, 0, total);
+    closeAllMenus();
+  };
+  menu.appendChild(allItem);
+
+  // ── Custom range input ──
+  const box = document.createElement('div');
+  box.className = 'copy-range-box';
+  box.innerHTML = `
+    <div class="copy-range-label">Pilih urutan</div>
+    <div class="copy-range-inputs">
+      <input type="number" id="rFrom_${blockId}" placeholder="Dari" min="1" max="${total}" value="1">
+      <span class="sep">—</span>
+      <input type="number" id="rTo_${blockId}"   placeholder="Sampai" min="1" max="${total}" value="${total}">
+    </div>
+    <div class="copy-range-hint">Total tersedia: ${total} grup (urutan 1–${total})</div>
+    <button class="copy-range-go" onclick="execCustomRange('${blockId}', ${total})">📋 Copy Range</button>`;
+  box.onclick = e => e.stopPropagation();
+  menu.appendChild(box);
+
+  document.body.appendChild(menu);
+
+  // Fokus ke input pertama
+  setTimeout(() => {
+    const inp = document.getElementById('rFrom_' + blockId);
+    if (inp) inp.focus();
+  }, 80);
+
+  // Enter di input langsung eksekusi
+  menu.querySelectorAll && setTimeout(() => {
+    ['rFrom_','rTo_'].forEach(prefix => {
+      const el = document.getElementById(prefix + blockId);
+      if (el) el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') execCustomRange(blockId, total);
+      });
+    });
+  }, 90);
+
+  // Tutup saat klik di luar
+  setTimeout(() => {
+    document.addEventListener('click', closeAllMenus, { once: true });
+  }, 0);
+}
+
+function execCustomRange(blockId, total) {
+  const fromEl = document.getElementById('rFrom_' + blockId);
+  const toEl   = document.getElementById('rTo_'   + blockId);
+  if (!fromEl || !toEl) return;
+
+  let from = parseInt(fromEl.value, 10);
+  let to   = parseInt(toEl.value,   10);
+
+  if (isNaN(from) || isNaN(to)) { toast('❌ Isi angka dari dan sampai'); return; }
+  if (from < 1)     from = 1;
+  if (to > total)   to   = total;
+  if (from > to)    { toast('❌ Angka "dari" harus ≤ "sampai"'); return; }
+
+  copyCityRange(blockId, from - 1, to);   // convert ke 0-based
+  closeAllMenus();
+}
+
+function closeAllMenus() {
+  document.querySelectorAll('.copy-menu').forEach(m => m.remove());
+}
+
+/* ── COPY RANGE ── */
+function copyCityRange(blockId, from, to) {
+  const ids = _cityIds[blockId];
+  if (!ids || !ids.length) { toast('❌ Tidak ada ID'); return; }
+
+  const slice = ids.slice(from, to);
+  if (!slice.length) { toast('❌ Range kosong'); return; }
+
+  const text = slice.join('\n');
+  doCopy(text, () => {
+    const btn = document.getElementById('copybtn_' + blockId);
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '✅ Disalin!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `📋 Copy <span class="chevron">▾</span>`;
+      }, 1500);
+    }
+    const label = (from === 0 && to >= ids.length)
+      ? `${slice.length} ID disalin (Semua)`
+      : `${slice.length} ID disalin (${from+1}–${to})`;
+    toast('✅ ' + label);
+  });
+}
+
+/* ── COPY 1 ID ── */
+function copyOneId(el, id) {
+  if (!id || id==='—') return;
+  doCopy(id, () => {
+    const orig = el.innerHTML;
+    el.classList.add('copied'); el.textContent = '✅';
+    setTimeout(() => { el.classList.remove('copied'); el.innerHTML = hl(id, _search); }, 1200);
+  });
+  toast('✅ ID disalin');
+}
+
+/* ── COPY HELPER ── */
+function doCopy(text, cb) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(cb).catch(() => fallback(text, cb));
+  } else {
+    fallback(text, cb);
+  }
+}
+function fallback(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); cb(); } catch(e) { toast('❌ Copy gagal, coba manual'); }
+  document.body.removeChild(ta);
+}
+
+/* ── EXPORT ── */
+function exportData() {
+  const blob = new Blob([JSON.stringify(_data,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'database_grup_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click(); toast('⬇ File JSON diunduh');
+}
+
+/* ── TOAST ── */
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+/* ── INIT ── */
+loadAllGroups();
+</script>
+</body>
+</html>
