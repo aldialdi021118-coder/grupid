@@ -261,10 +261,40 @@ body {
 }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* TABS */
+.tabs-wrap {
+  display: flex; gap: 0; margin-bottom: 10px;
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 10px;
+  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.tab-btn {
+  flex: 1; padding: 9px 6px; border: none; background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700;
+  color: #8a94a6; cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  border-right: 1px solid #e5e9f0; position: relative;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn:hover { background: #f8faff; color: #4f7cff; }
+.tab-btn.active {
+  background: linear-gradient(135deg, #4f7cff, #7c4fff);
+  color: #fff;
+}
+.tab-badge {
+  font-size: 9px; padding: 1px 5px; border-radius: 20px;
+  font-weight: 800; min-width: 18px; text-align: center;
+}
+.tab-btn.active .tab-badge { background: rgba(255,255,255,0.25); color: #fff; }
+.tab-btn:not(.active) .tab-badge { background: #eef1f8; color: #5a6280; }
+.tab-btn.tab-utama.active  { background: linear-gradient(135deg, #f5a623, #ff7c4f); }
+.tab-btn.tab-fanpage.active { background: linear-gradient(135deg, #4f7cff, #7c4fff); }
+.tab-btn.tab-secondary.active { background: linear-gradient(135deg, #1db56a, #0e9c59); }
+
 @media(max-width:480px) {
   .akun-sel { max-width: 110px; font-size: 11px; }
   .stat-v { font-size: 17px; }
   .group-item { padding-left: 14px; }
+  .tab-btn { font-size: 10px; padding: 8px 4px; }
 }
 </style>
 </head>
@@ -302,6 +332,18 @@ body {
     </select>
   </div>
 
+  <div class="tabs-wrap" id="tabs-wrap" style="display:none">
+    <button class="tab-btn tab-utama active" onclick="switchTab('utama')" id="tab-utama">
+      🏠 Akun Utama <span class="tab-badge" id="tbadge-utama">0</span>
+    </button>
+    <button class="tab-btn tab-fanpage" onclick="switchTab('fanpage')" id="tab-fanpage">
+      📄 Fanpage <span class="tab-badge" id="tbadge-fanpage">0</span>
+    </button>
+    <button class="tab-btn tab-secondary" onclick="switchTab('secondary')" id="tab-secondary">
+      🔀 Secondary <span class="tab-badge" id="tbadge-secondary">0</span>
+    </button>
+  </div>
+
   <div id="content">
     <div class="empty">
       <div class="ico">⏳</div>
@@ -319,7 +361,29 @@ const FIREBASE_TOKEN = '';
 
 let _data   = {};
 let _search = '';
+let _activeTab = 'utama';
 const _cityIds = {};   // blockId → array of IDs (urut)
+
+/* ── CLASSIFY AKUN ── */
+function getAkunTab(key, d) {
+  const name = ((d.namaAkun || key) + '').trim().toLowerCase();
+  if (name.endsWith('fanpage'))   return 'fanpage';
+  if (name.endsWith('secondary')) return 'secondary';
+  return 'utama';
+}
+
+/* ── SWITCH TAB ── */
+function switchTab(tab) {
+  _activeTab = tab;
+  ['utama','fanpage','secondary'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  // Reset filter akun saat ganti tab
+  document.getElementById('akun-sel').value = '';
+  buildFilter();
+  render();
+  updateStats();
+}
 
 /* ── STATUS ── */
 function setStatus(msg, type) {
@@ -350,7 +414,9 @@ async function loadAllGroups() {
     buildFilter(); render(); updateStats();
     document.getElementById('stats').style.display    = '';
     document.getElementById('toolbar').style.display  = '';
+    document.getElementById('tabs-wrap').style.display = '';
     document.getElementById('export-btn').style.display = '';
+    updateTabBadges();
     setStatus(Object.keys(raw).length + ' akun berhasil dimuat', 'ok');
   } catch(e) {
     setStatus('Gagal: ' + e.message, 'error');
@@ -366,11 +432,24 @@ function buildFilter() {
   const sel = document.getElementById('akun-sel');
   sel.innerHTML = '<option value="">Semua Akun</option>';
   Object.entries(_data).forEach(([k, d]) => {
+    if (getAkunTab(k, d) !== _activeTab) return;
     const o = document.createElement('option');
     o.value = k;
     o.textContent = (d.namaAkun||k) + (d.subAkun ? ' / '+d.subAkun : '');
     sel.appendChild(o);
   });
+}
+
+/* ── TAB BADGES ── */
+function updateTabBadges() {
+  const counts = { utama: 0, fanpage: 0, secondary: 0 };
+  Object.entries(_data).forEach(([k, d]) => {
+    const tab = getAkunTab(k, d);
+    counts[tab]++;
+  });
+  document.getElementById('tbadge-utama').textContent     = counts.utama;
+  document.getElementById('tbadge-fanpage').textContent   = counts.fanpage;
+  document.getElementById('tbadge-secondary').textContent = counts.secondary;
 }
 function onSearch() {
   _search = document.getElementById('search-inp').value.trim().toLowerCase();
@@ -398,6 +477,8 @@ function render() {
   Object.keys(_cityIds).forEach(k => delete _cityIds[k]);
 
   Object.entries(_data).forEach(([key, d]) => {
+    // Filter berdasarkan tab aktif
+    if (getAkunTab(key, d) !== _activeTab) return;
     if (sel && key !== sel) return;
     const cities = d.cities || {};
 
@@ -464,7 +545,7 @@ function render() {
   });
 
   document.getElementById('content').innerHTML = html ||
-    `<div class="empty"><div class="ico">🔎</div>Tidak ada hasil<small>Coba kata kunci lain</small></div>`;
+    `<div class="empty"><div class="ico">🔎</div>Tidak ada hasil<small>Tidak ada akun di tab ini atau coba kata kunci lain</small></div>`;
 }
 
 /* ── STATS ── */
@@ -472,6 +553,7 @@ function updateStats() {
   const sel = document.getElementById('akun-sel').value;
   let a=0, k=0, g=0;
   Object.entries(_data).forEach(([key,d]) => {
+    if (getAkunTab(key, d) !== _activeTab) return;
     if (sel && key!==sel) return;
     a++; const c = d.cities||{};
     k += Object.keys(c).length;
