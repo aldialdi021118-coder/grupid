@@ -61,7 +61,7 @@ body {
 #statusbar.error   { background: #fff1f2; color: #e53e3e; border: 1px solid #fcc; }
 
 /* WRAP */
-.wrap { max-width: 760px; margin: 0 auto; padding: 12px 12px 50px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 10px 12px 50px; }
 
 /* STATS */
 .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
@@ -385,12 +385,15 @@ body {
 
 /* TABS */
 .tabs-wrap {
-  display: flex; gap: 0; margin-bottom: 10px;
-  background: #fff; border: 1px solid #e5e9f0; border-radius: 10px;
-  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex; gap: 0;
+  background: #fff;
+  border-bottom: 2px solid #e5e9f0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: sticky; top: 95px; z-index: 80;
 }
 .tab-btn {
-  flex: 1; padding: 9px 6px; border: none; background: transparent;
+  flex: 1; padding: 10px 6px; border: none; background: transparent;
   font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700;
   color: #8a94a6; cursor: pointer; transition: all .15s;
   display: flex; align-items: center; justify-content: center; gap: 5px;
@@ -420,9 +423,13 @@ body {
 
 /* ── MAIN OUTER TABS ── */
 .main-tabs-wrap {
-  display: flex; gap: 0; margin-bottom: 10px;
-  background: #fff; border: 1px solid #e5e9f0; border-radius: 10px;
-  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex; gap: 0;
+  background: #fff;
+  border-top: 1px solid #e5e9f0;
+  border-bottom: 1px solid #e5e9f0;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  position: sticky; top: 53px; z-index: 90;
 }
 .main-tab-btn {
   flex: 1; padding: 10px 6px; border: none; background: transparent;
@@ -546,13 +553,24 @@ body {
 
 <div id="statusbar"><span id="status-ico"></span><span id="status-text"></span></div>
 
-<div class="wrap">
-  <!-- OUTER MAIN TABS -->
-  <div class="main-tabs-wrap">
-    <button class="main-tab-btn active" id="main-tab-akun" onclick="switchMainTab('akun')">📋 Daftar Akun</button>
-    <button class="main-tab-btn cw-tab" id="main-tab-cw" onclick="switchMainTab('cw')">✍️ Copywriting</button>
-  </div>
+<div class="main-tabs-wrap" id="main-tabs-wrap">
+  <button class="main-tab-btn active" id="main-tab-akun" onclick="switchMainTab('akun')">📋 Daftar Akun</button>
+  <button class="main-tab-btn cw-tab" id="main-tab-cw" onclick="switchMainTab('cw')">✍️ Copywriting</button>
+</div>
 
+<div class="tabs-wrap" id="tabs-wrap" style="display:none">
+  <button class="tab-btn tab-utama active" onclick="switchTab('utama')" id="tab-utama">
+    🏠 Akun Utama <span class="tab-badge" id="tbadge-utama">0</span>
+  </button>
+  <button class="tab-btn tab-fanpage" onclick="switchTab('fanpage')" id="tab-fanpage">
+    📄 Fanpage <span class="tab-badge" id="tbadge-fanpage">0</span>
+  </button>
+  <button class="tab-btn tab-secondary" onclick="switchTab('secondary')" id="tab-secondary">
+    🔀 Secondary <span class="tab-badge" id="tbadge-secondary">0</span>
+  </button>
+</div>
+
+<div class="wrap">
   <!-- PANE: DAFTAR AKUN -->
   <div id="pane-akun">
   <div class="stats" id="stats" style="display:none">
@@ -570,17 +588,6 @@ body {
     </select>
   </div>
 
-  <div class="tabs-wrap" id="tabs-wrap" style="display:none">
-    <button class="tab-btn tab-utama active" onclick="switchTab('utama')" id="tab-utama">
-      🏠 Akun Utama <span class="tab-badge" id="tbadge-utama">0</span>
-    </button>
-    <button class="tab-btn tab-fanpage" onclick="switchTab('fanpage')" id="tab-fanpage">
-      📄 Fanpage <span class="tab-badge" id="tbadge-fanpage">0</span>
-    </button>
-    <button class="tab-btn tab-secondary" onclick="switchTab('secondary')" id="tab-secondary">
-      🔀 Secondary <span class="tab-badge" id="tbadge-secondary">0</span>
-    </button>
-  </div>
 
   <div id="content">
     <div class="empty">
@@ -589,7 +596,6 @@ body {
       <small>Mohon tunggu sebentar</small>
     </div>
   </div>
-</div>
 
   </div><!-- /pane-akun -->
   <!-- PANE: COPYWRITING -->
@@ -1224,6 +1230,16 @@ function switchMainTab(tab) {
   document.getElementById('pane-cw').style.display   = tab === 'cw'   ? '' : 'none';
   document.getElementById('main-tab-akun').classList.toggle('active', tab === 'akun');
   document.getElementById('main-tab-cw').classList.toggle('active', tab === 'cw');
+  // sub-tabs only visible on daftar akun AND when data already loaded
+  const tw = document.getElementById('tabs-wrap');
+  if (tab === 'cw') {
+    tw.style.display = 'none';
+  } else {
+    // restore visibility if data was already loaded
+    if (document.getElementById('toolbar').style.display !== 'none') {
+      tw.style.display = '';
+    }
+  }
 }
 
 /* ==========================================
