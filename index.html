@@ -442,6 +442,7 @@ body {
 .main-tab-btn:hover { background: #f8faff; color: #4f7cff; }
 .main-tab-btn.active { background: linear-gradient(135deg, #1a1d27, #2d3250); color: #fff; }
 .main-tab-btn.active.cw-tab { background: linear-gradient(135deg, #7c4fff, #4f7cff); }
+.main-tab-btn.active.ct-tab { background: linear-gradient(135deg, #f5a623, #e8830a); }
 
 /* ── COPYWRITING PANE ── */
 .cw-wrap { padding: 4px 0 60px; }
@@ -533,6 +534,120 @@ body {
   display: flex; align-items: center; gap: 5px; margin-bottom: 8px;
 }
 
+
+/* ── TOMBOL CATATAN ── */
+.btn-note {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 5px;
+  border: 1.5px solid #e5e9f0; background: #fff;
+  font-size: 10px; line-height: 1; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all .15s; color: #aab0c4; padding: 0;
+}
+.btn-note:hover { border-color: #7c4fff; background: #f5f0ff; color: #7c4fff; }
+.btn-note.has-note { border-color: #f5a623; background: #fff8e6; color: #c9960a; }
+
+/* ── NOTE MODAL ── */
+.note-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 999; display: none; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.note-overlay.open { display: flex; }
+.note-modal {
+  background: #fff; border-radius: 16px; width: 100%; max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  overflow: hidden; animation: noteSlideIn .2s ease;
+}
+@keyframes noteSlideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.note-modal-head {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #e5e9f0;
+}
+.note-modal-title { font-size: 13px; font-weight: 800; color: #1a1d27; margin-bottom: 2px; }
+.note-modal-sub   { font-size: 10px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; }
+.note-modal-body  { padding: 12px 16px; }
+.note-textarea {
+  width: 100%; min-height: 140px; resize: vertical;
+  border: 1.5px solid #e5e9f0; border-radius: 10px;
+  padding: 10px 12px; font-size: 12px; line-height: 1.7;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1d27;
+  background: #f8faff; transition: border .15s;
+}
+.note-textarea:focus { outline: none; border-color: #7c4fff; box-shadow: 0 0 0 3px #ede8ff; background: #fff; }
+.note-modal-foot {
+  padding: 10px 16px 14px;
+  display: flex; gap: 8px;
+}
+.btn-note-back {
+  flex: 1; padding: 10px; border-radius: 9px;
+  border: 1.5px solid #e5e9f0; background: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700;
+  color: #5a6280; cursor: pointer; transition: all .15s;
+}
+.btn-note-back:hover { background: #f4f6fa; border-color: #c5cad8; }
+.btn-note-save {
+  flex: 2; padding: 10px; border-radius: 9px; border: none;
+  background: linear-gradient(135deg, #7c4fff, #4f7cff);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 800;
+  color: #fff; cursor: pointer; transition: all .15s;
+}
+.btn-note-save:hover { opacity: .9; }
+
+/* ── TAB CATATAN PANE ── */
+.catatan-wrap { padding: 10px 0 60px; }
+.catatan-empty {
+  text-align: center; padding: 48px 20px; color: #8a94a6;
+  font-size: 13px; line-height: 1.8;
+}
+.catatan-empty .ico { font-size: 40px; margin-bottom: 10px; }
+.catatan-table-wrap {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 12px;
+  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.catatan-table { width: 100%; border-collapse: collapse; }
+.catatan-table th {
+  padding: 9px 10px; background: #f4f6fa; font-size: 10px;
+  font-weight: 800; color: #5a6280; text-align: left;
+  border-bottom: 2px solid #e5e9f0; text-transform: uppercase; letter-spacing:.04em;
+  white-space: nowrap;
+}
+.catatan-table td {
+  padding: 9px 10px; font-size: 11px; color: #1a1d27;
+  border-bottom: 1px solid #f0f2f8; vertical-align: top;
+}
+.catatan-table tr:last-child td { border-bottom: none; }
+.catatan-table tr:hover td { background: #fafbff; }
+.ct-no  { width: 28px; text-align: center; color: #8a94a6; font-weight: 700; }
+.ct-akun { min-width: 80px; max-width: 100px; font-weight: 700; }
+.ct-kota { min-width: 70px; max-width: 90px; color: #5a6280; }
+.ct-nama {
+  min-width: 100px; max-width: 140px; font-weight: 700;
+  cursor: pointer; color: #4f7cff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ct-nama:hover { text-decoration: underline; color: #7c4fff; }
+.ct-id  { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8a94a6; white-space: nowrap; }
+.ct-cat {
+  min-width: 160px; font-size: 11px; color: #3a4060; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-word;
+}
+.ct-act { width: 28px; text-align: center; }
+.btn-del-note {
+  background: none; border: none; cursor: pointer; color: #ccc;
+  font-size: 13px; padding: 2px; border-radius: 4px; transition: all .15s;
+}
+.btn-del-note:hover { color: #e53e3e; background: #fff1f2; }
+.catatan-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.catatan-count {
+  font-size: 11px; font-weight: 700; color: #8a94a6;
+}
+
 </style>
 </head>
 <body>
@@ -556,6 +671,7 @@ body {
 <div class="main-tabs-wrap" id="main-tabs-wrap">
   <button class="main-tab-btn active" id="main-tab-akun" onclick="switchMainTab('akun')">📋 Daftar Akun</button>
   <button class="main-tab-btn cw-tab" id="main-tab-cw" onclick="switchMainTab('cw')">✍️ Copywriting</button>
+  <button class="main-tab-btn ct-tab" id="main-tab-catatan" onclick="switchMainTab('catatan')">🗒️ Catatan</button>
 </div>
 
 <div class="tabs-wrap" id="tabs-wrap" style="display:none">
@@ -674,6 +790,21 @@ body {
       </div>
     </div>
   </div><!-- /pane-cw -->
+
+  <!-- PANE: CATATAN -->
+  <div id="pane-catatan" style="display:none" class="catatan-wrap">
+    <div class="catatan-header">
+      <span class="catatan-count" id="catatan-count">0 catatan</span>
+    </div>
+    <div id="catatan-content">
+      <div class="catatan-empty">
+        <div class="ico">📝</div>
+        Belum ada catatan<br>
+        <small>Klik tombol ✏️ di samping nama grup untuk menambah catatan</small>
+      </div>
+    </div>
+  </div><!-- /pane-catatan -->
+
 </div><!-- /wrap -->
 
 <div id="toast"></div>
@@ -861,10 +992,14 @@ function render() {
         const nid  = 'nid_' + Math.random().toString(36).slice(2,8);
         const lid  = 'lid_' + Math.random().toString(36).slice(2,8);
 
+        const hasNote = _notesHasKey(sid);
         html += `<div class="group-item">
           <span class="g-num">${idx+1}</span>
           <span class="g-name" id="${nid}" title="${esc(sname)}"
-            onclick="copyName(this, '${esc(sname)}')">${hl(sname, kw)}</span>
+            onclick="copyName(this, '${esc(sname)}')"
+            ondblclick="removeCopiedMark(this, '${esc(sname)}')">${hl(sname, kw)}</span>
+          <button class="btn-note${hasNote?' has-note':''}" title="${hasNote?'Edit catatan':'Tambah catatan'}"
+            onclick="openNoteModal('${esc(sid)}','${esc(sname)}','${esc(key)}','${esc(c.city)}','${fburl}')">✏️</button>
           <span class="g-id" id="${uid}"
             onclick="copyOneId(this, '${esc(sid)}')">${hl(sid, kw)}</span>
           ${fburl ? `<span class="g-link" id="${lid}"
@@ -1050,7 +1185,7 @@ function copyName(el, name) {
 
 /* ── BEKAS SALIN — simpan & restore highlight 12 jam ── */
 const _COPIED_KEY = 'fewfeed_copied_names';
-const _COPIED_TTL = 12 * 60 * 60 * 1000; // 12 jam ms
+const _COPIED_TTL = 3 * 24 * 60 * 60 * 1000; // 3 hari ms
 
 function _loadCopiedMap() {
   try { return JSON.parse(localStorage.getItem(_COPIED_KEY) || '{}'); }
@@ -1075,6 +1210,17 @@ function _cleanCopiedMap() {
   if (changed) _saveCopiedMap(map);
   return map;
 }
+function removeCopiedMark(el, name) {
+  // Hapus dari localStorage
+  const map = _loadCopiedMap();
+  if (map[name]) {
+    delete map[name];
+    _saveCopiedMap(map);
+  }
+  // Hapus visual
+  el.classList.remove('pernah-salin');
+}
+
 function markCopiedNames() {
   const map = _cleanCopiedMap();
   const now = Date.now();
@@ -1217,29 +1363,207 @@ async function doDeleteAkun(key, namaAkun, btn) {
   }
 }
 
+
+/* ==========================================
+   CATATAN / NOTES SYSTEM
+========================================== */
+const _NOTES_KEY = 'fewfeed_notes';
+
+function _loadNotes() {
+  try { return JSON.parse(localStorage.getItem(_NOTES_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function _saveNotes(map) {
+  try { localStorage.setItem(_NOTES_KEY, JSON.stringify(map)); } catch(e) {}
+}
+function _notesHasKey(sid) {
+  const map = _loadNotes();
+  return !!(map[sid] && map[sid].note && map[sid].note.trim());
+}
+
+// ── Modal state ──
+let _noteCtx = { sid:'', sname:'', key:'', city:'', link:'' };
+
+function openNoteModal(sid, sname, akunKey, city, link) {
+  _noteCtx = { sid, sname, akunKey, city, link };
+  const map = _loadNotes();
+  const existing = map[sid] ? map[sid].note || '' : '';
+
+  document.getElementById('note-modal-title').textContent = sname;
+  document.getElementById('note-modal-sub').textContent   = '📍 ' + city + ' • ID: ' + sid;
+  document.getElementById('note-textarea').value          = existing;
+  document.getElementById('note-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('note-textarea').focus(), 100);
+}
+
+function closeNoteModal() {
+  document.getElementById('note-overlay').classList.remove('open');
+}
+
+function saveNote() {
+  const { sid, sname, akunKey, city, link } = _noteCtx;
+  const note = document.getElementById('note-textarea').value.trim();
+  const map  = _loadNotes();
+
+  if (!note) {
+    // Jika kosong → hapus catatan
+    delete map[sid];
+    _saveNotes(map);
+    closeNoteModal();
+    _refreshNoteButtons();
+    renderCatatan();
+    toast('🗑 Catatan dihapus');
+    return;
+  }
+
+  const akunName = (_data[akunKey] && _data[akunKey].namaAkun) ? _data[akunKey].namaAkun : akunKey;
+  map[sid] = {
+    note,
+    sname,
+    city,
+    akunName,
+    akunKey,
+    link,
+    updatedAt: Date.now()
+  };
+  _saveNotes(map);
+  closeNoteModal();
+  _refreshNoteButtons();
+  renderCatatan();
+  toast('✅ Catatan disimpan');
+}
+
+function deleteNote(sid) {
+  if (!confirm('Hapus catatan ini?')) return;
+  const map = _loadNotes();
+  delete map[sid];
+  _saveNotes(map);
+  _refreshNoteButtons();
+  renderCatatan();
+  toast('🗑 Catatan dihapus');
+}
+
+// Refresh .btn-note classes after save/delete without full re-render
+function _refreshNoteButtons() {
+  document.querySelectorAll('.btn-note').forEach(btn => {
+    const onclick = btn.getAttribute('onclick') || '';
+    const m = onclick.match(/'([^']+)'/);
+    if (!m) return;
+    const sid = m[1];
+    const has = _notesHasKey(sid);
+    btn.classList.toggle('has-note', has);
+    btn.title = has ? 'Edit catatan' : 'Tambah catatan';
+  });
+}
+
+// ── Render Catatan Table ──
+function renderCatatan() {
+  const map     = _loadNotes();
+  const entries = Object.entries(map)
+    .filter(([,v]) => v && v.note)
+    .sort((a,b) => (b[1].updatedAt||0) - (a[1].updatedAt||0));
+
+  const countEl = document.getElementById('catatan-count');
+  const contEl  = document.getElementById('catatan-content');
+  if (!countEl || !contEl) return;
+
+  countEl.textContent = entries.length + ' catatan';
+
+  if (!entries.length) {
+    contEl.innerHTML = `<div class="catatan-empty">
+      <div class="ico">📝</div>
+      Belum ada catatan<br>
+      <small>Klik tombol ✏️ di samping nama grup untuk menambah catatan</small>
+    </div>`;
+    return;
+  }
+
+  let rows = '';
+  entries.forEach(([sid, v], i) => {
+    const link   = v.link || ('https://www.facebook.com/groups/' + sid);
+    const escN   = (s) => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    rows += `<tr>
+      <td class="ct-no">${i+1}</td>
+      <td class="ct-akun">${escN(v.akunName||'—')}</td>
+      <td class="ct-kota">${escN(v.city||'—')}</td>
+      <td class="ct-nama" title="Klik untuk copy link grup"
+          onclick="ctCopyLink(this,'${escN(link)}','${escN(v.sname||'—')}')">${escN(v.sname||'—')}</td>
+      <td class="ct-id">${escN(sid)}</td>
+      <td class="ct-cat">${escN(v.note||'')}</td>
+      <td class="ct-act"><button class="btn-del-note" title="Hapus catatan" onclick="deleteNote('${escN(sid)}')">🗑</button></td>
+    </tr>`;
+  });
+
+  contEl.innerHTML = `<div class="catatan-table-wrap">
+    <table class="catatan-table">
+      <thead><tr>
+        <th class="ct-no">#</th>
+        <th class="ct-akun">Akun</th>
+        <th class="ct-kota">Kota</th>
+        <th class="ct-nama">Nama Grup</th>
+        <th class="ct-id">ID Grup</th>
+        <th class="ct-cat">Catatan</th>
+        <th class="ct-act"></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+function ctCopyLink(el, link, name) {
+  doCopy(link, () => {
+    const orig = el.textContent;
+    el.textContent = '✅ Link disalin!';
+    setTimeout(() => { el.textContent = orig; }, 1400);
+  });
+  toast('✅ Link grup ' + name + ' disalin');
+}
+
 /* ── INIT ── */
 _cleanCopiedMap();      // prune expired entries on load
 _scheduleAutoClean();   // schedule auto-clear when TTL expires
+renderCatatan();         // render catatan from localStorage
 loadAllGroups();
 
 /* ==========================================
    OUTER TAB SWITCHER
 ========================================== */
+let _akunScrollY  = 0;
+let _akunSelValue = '';
+
 function switchMainTab(tab) {
-  document.getElementById('pane-akun').style.display = tab === 'akun' ? '' : 'none';
-  document.getElementById('pane-cw').style.display   = tab === 'cw'   ? '' : 'none';
-  document.getElementById('main-tab-akun').classList.toggle('active', tab === 'akun');
-  document.getElementById('main-tab-cw').classList.toggle('active', tab === 'cw');
-  // sub-tabs only visible on daftar akun AND when data already loaded
+  const isNowAkun = document.getElementById('pane-akun').style.display !== 'none';
+
+  // Simpan posisi + filter sebelum pergi dari pane akun
+  if (isNowAkun && tab !== 'akun') {
+    _akunScrollY  = window.scrollY;
+    _akunSelValue = document.getElementById('akun-sel').value;
+  }
+
+  document.getElementById('pane-akun').style.display    = tab === 'akun'    ? '' : 'none';
+  document.getElementById('pane-cw').style.display      = tab === 'cw'      ? '' : 'none';
+  document.getElementById('pane-catatan').style.display = tab === 'catatan' ? '' : 'none';
+
+  document.getElementById('main-tab-akun').classList.toggle('active',    tab === 'akun');
+  document.getElementById('main-tab-cw').classList.toggle('active',      tab === 'cw');
+  document.getElementById('main-tab-catatan').classList.toggle('active', tab === 'catatan');
+
+  // Sub-tabs: hanya tampil di pane akun
   const tw = document.getElementById('tabs-wrap');
-  if (tab === 'cw') {
+  if (tab !== 'akun') {
     tw.style.display = 'none';
   } else {
-    // restore visibility if data was already loaded
     if (document.getElementById('toolbar').style.display !== 'none') {
       tw.style.display = '';
     }
+    // Pulihkan filter akun & scroll position
+    document.getElementById('akun-sel').value = _akunSelValue;
+    render(); updateStats();
+    requestAnimationFrame(() => window.scrollTo({ top: _akunScrollY, behavior: 'instant' }));
   }
+
+  // Render catatan saat tab dibuka
+  if (tab === 'catatan') renderCatatan();
 }
 
 /* ==========================================
@@ -1852,5 +2176,23 @@ function cwCopyResult() {
 }
 
 </script>
+
+<!-- NOTE MODAL -->
+<div class="note-overlay" id="note-overlay" onclick="if(event.target===this)closeNoteModal()">
+  <div class="note-modal">
+    <div class="note-modal-head">
+      <div class="note-modal-title" id="note-modal-title">Catatan Grup</div>
+      <div class="note-modal-sub" id="note-modal-sub"></div>
+    </div>
+    <div class="note-modal-body">
+      <textarea class="note-textarea" id="note-textarea" placeholder="Tulis catatan untuk grup ini...&#10;Contoh: sudah posting 3x, engagement bagus, coba lagi besok..."></textarea>
+    </div>
+    <div class="note-modal-foot">
+      <button class="btn-note-back" onclick="closeNoteModal()">← Kembali</button>
+      <button class="btn-note-save" onclick="saveNote()">💾 Simpan Catatan</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
