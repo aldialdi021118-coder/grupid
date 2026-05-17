@@ -326,6 +326,25 @@ body {
 }
 .g-name:hover  { background: #f0f4ff; color: #4f7cff; border-color: #dde7ff; }
 .g-name.copied { background: #e8f8f0; color: #1db56a; border-color: #b8e8ce; }
+.g-name.pernah-salin {
+  background: #fff8e6;
+  border-color: #f5c842;
+  color: #8a6800;
+  position: relative;
+}
+.g-name.pernah-salin::after {
+  content: '✓';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: #c9960a;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+}
+.g-name.pernah-salin:hover { background: #fff3cc; border-color: #e6b800; color: #6b5000; }
 .g-name mark { background: #d6e4ff; color: #2d5be3; border-radius: 2px; padding: 0 1px; }
 
 /* ID grup */
@@ -398,6 +417,115 @@ body {
   .g-id { font-size: 9px; padding: 2px 5px; }
   .g-link { font-size: 9px; padding: 2px 5px; }
 }
+
+/* ── MAIN OUTER TABS ── */
+.main-tabs-wrap {
+  display: flex; gap: 0; margin-bottom: 10px;
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 10px;
+  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.main-tab-btn {
+  flex: 1; padding: 10px 6px; border: none; background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 800;
+  color: #8a94a6; cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  border-right: 1px solid #e5e9f0;
+}
+.main-tab-btn:last-child { border-right: none; }
+.main-tab-btn:hover { background: #f8faff; color: #4f7cff; }
+.main-tab-btn.active { background: linear-gradient(135deg, #1a1d27, #2d3250); color: #fff; }
+.main-tab-btn.active.cw-tab { background: linear-gradient(135deg, #7c4fff, #4f7cff); }
+
+/* ── COPYWRITING PANE ── */
+.cw-wrap { padding: 4px 0 60px; }
+.cw-card {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 12px;
+  padding: 14px 14px; margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.cw-label {
+  font-size: 10px; font-weight: 800; color: #8a94a6;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+}
+.cw-input {
+  width: 100%; background: #fff; border: 1.5px solid #e5e9f0; border-radius: 8px;
+  padding: 10px 12px; font-size: 14px; font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1d27;
+  transition: border .15s;
+}
+.cw-input:focus { outline: none; border-color: #4f7cff; box-shadow: 0 0 0 3px #e8efff; }
+.cw-select {
+  width: 100%; background: #fff; border: 1.5px solid #e5e9f0; border-radius: 8px;
+  padding: 9px 12px; font-size: 12px; font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1d27; cursor: pointer;
+}
+.cw-select:focus { outline: none; border-color: #4f7cff; }
+.cw-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.cw-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+/* Checkbox card */
+.cw-chk-card {
+  flex: 1; background: #f8faff; border: 2px solid #e5e9f0; border-radius: 10px;
+  padding: 10px 11px; cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; gap: 9px; min-width: 0;
+}
+.cw-chk-card:hover { border-color: #4f7cff; background: #f0f4ff; }
+.cw-chk-card.np-active { border-color: #1db56a; background: #e8f8f0; }
+.cw-chk-card.pl-active { border-color: #7c4fff; background: #f5f0ff; }
+.cw-chk-card input[type=checkbox] { width: 16px; height: 16px; flex-shrink: 0; accent-color: #4f7cff; cursor: pointer; }
+.cw-chk-title { font-size: 12px; font-weight: 700; color: #1a1d27; }
+.cw-chk-sub { font-size: 10px; color: #8a94a6; }
+
+/* Toggle group */
+.cw-toggle-group { display: flex; gap: 4px; margin-top: 4px; }
+.cw-toggle-btn {
+  flex: 1; padding: 6px 4px; border: 1.5px solid #e5e9f0; border-radius: 7px;
+  background: #fff; color: #8a94a6; font-size: 11px; font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all .15s;
+  text-align: center;
+}
+.cw-toggle-btn:hover { border-color: #4f7cff; color: #4f7cff; }
+.cw-toggle-btn.active { background: #4f7cff; border-color: #4f7cff; color: #fff; }
+
+/* Result area */
+.cw-result-wrap { position: relative; }
+.cw-result {
+  width: 100%; min-height: 220px; background: #f8faff;
+  border: 1.5px solid #e5e9f0; border-radius: 10px;
+  padding: 12px; font-size: 12px; line-height: 1.7;
+  font-family: 'JetBrains Mono', monospace; color: #1a1d27;
+  resize: vertical; box-sizing: border-box;
+}
+.cw-result:focus { outline: none; border-color: #4f7cff; }
+.cw-result-actions { display: flex; gap: 6px; margin-top: 8px; }
+.btn-cw-gen {
+  flex: 1; padding: 11px; border-radius: 9px; border: none;
+  background: linear-gradient(135deg, #7c4fff, #4f7cff); color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800;
+  cursor: pointer; transition: all .2s;
+}
+.btn-cw-gen:hover { opacity: .9; transform: translateY(-1px); }
+.btn-cw-gen:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn-cw-copy {
+  padding: 11px 16px; border-radius: 9px; border: 1.5px solid #e5e9f0;
+  background: #fff; color: #5a6280; font-size: 12px; font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all .15s;
+}
+.btn-cw-copy:hover { border-color: #4f7cff; color: #4f7cff; background: #f0f4ff; }
+.btn-cw-copy.copied { background: #e8f8f0; border-color: #1db56a; color: #1db56a; }
+.cw-status {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  padding: 7px 10px; border-radius: 7px; margin-bottom: 8px;
+  display: none; background: #eef2ff; color: #4f7cff; border: 1px solid #c7d4ff;
+}
+.cw-status.ok    { background: #e8f8f0; color: #1db56a; border-color: #b8e8ce; display: flex; }
+.cw-status.error { background: #fff1f2; color: #e53e3e; border-color: #fcc; display: flex; }
+.cw-status.loading { display: flex; }
+.cw-section-title {
+  font-size: 11px; font-weight: 800; color: #3a4060;
+  display: flex; align-items: center; gap: 5px; margin-bottom: 8px;
+}
+
 </style>
 </head>
 <body>
@@ -419,6 +547,14 @@ body {
 <div id="statusbar"><span id="status-ico"></span><span id="status-text"></span></div>
 
 <div class="wrap">
+  <!-- OUTER MAIN TABS -->
+  <div class="main-tabs-wrap">
+    <button class="main-tab-btn active" id="main-tab-akun" onclick="switchMainTab('akun')">📋 Daftar Akun</button>
+    <button class="main-tab-btn cw-tab" id="main-tab-cw" onclick="switchMainTab('cw')">✍️ Copywriting</button>
+  </div>
+
+  <!-- PANE: DAFTAR AKUN -->
+  <div id="pane-akun">
   <div class="stats" id="stats" style="display:none">
     <div class="stat"><div class="stat-v gold" id="s-akun">0</div><div class="stat-l">Akun</div></div>
     <div class="stat"><div class="stat-v blue" id="s-kota">0</div><div class="stat-l">Kota</div></div>
@@ -454,6 +590,85 @@ body {
     </div>
   </div>
 </div>
+
+  </div><!-- /pane-akun -->
+  <!-- PANE: COPYWRITING -->
+  <div id="pane-cw" style="display:none" class="cw-wrap">
+
+    <!-- Kota Input -->
+    <div class="cw-card">
+      <div class="cw-section-title">📍 Nama Kota</div>
+      <input type="text" id="cw_kota_input" class="cw-input" placeholder="Masukkan nama kota... (contoh: Malang, Yogyakarta)" autocomplete="off">
+    </div>
+
+    <!-- Admin + Options -->
+    <div class="cw-card">
+      <div class="cw-section-title">⚙️ Pengaturan Caption</div>
+
+      <!-- Admin jalur -->
+      <div class="cw-label">👤 Admin / Kontak</div>
+      <select id="cw_admin" class="cw-select" style="margin-bottom:12px;">
+        <option value="liza">Admin Jalur 1 — 0878-2805-8309</option>
+        <option value="tiara">Admin Jalur 2 — 0851-5543-4767</option>
+      </select>
+
+      <!-- Non Pasutri + Punchline -->
+      <div class="cw-label">🔧 Opsi Konten</div>
+      <div class="cw-row2" style="margin-bottom:12px;">
+        <div class="cw-chk-card" id="cw_card_np" onclick="cwToggleCard('cw_chk_np','cw_card_np','np-active')">
+          <input type="checkbox" id="cw_chk_np">
+          <div><div class="cw-chk-title">🔞 Non Pasutri</div><div class="cw-chk-sub">Bebas pasangan</div></div>
+        </div>
+        <div class="cw-chk-card" id="cw_card_pl" onclick="cwToggleCard('cw_chk_pl','cw_card_pl','pl-active')">
+          <input type="checkbox" id="cw_chk_pl">
+          <div><div class="cw-chk-title">🔥 Punchline</div><div class="cw-chk-sub">Pembuka kuat</div></div>
+        </div>
+      </div>
+
+      <!-- Model Gaya -->
+      <div class="cw-label">✨ Model Gaya</div>
+      <div id="cw_model_gaya" class="cw-toggle-group" style="margin-bottom:12px;">
+        <button class="cw-toggle-btn active" data-val="default" onclick="cwSetToggle('cw_model_gaya',this)">🎨 Default</button>
+        <button class="cw-toggle-btn" data-val="emoji_full" onclick="cwSetToggle('cw_model_gaya',this)">🤩 Emoji Full</button>
+        <button class="cw-toggle-btn" data-val="no_emoji" onclick="cwSetToggle('cw_model_gaya',this)">📝 No Emoji</button>
+        <button class="cw-toggle-btn" data-val="singkat" onclick="cwSetToggle('cw_model_gaya',this)">⚡ Singkat</button>
+      </div>
+
+      <!-- Layout Fasilitas + Kamar -->
+      <div class="cw-row2">
+        <div>
+          <div class="cw-label">🏠 Layout Fasilitas</div>
+          <div id="cw_layout_fac" class="cw-toggle-group">
+            <button class="cw-toggle-btn active" data-val="auto" onclick="cwSetToggle('cw_layout_fac',this)">🔀 Auto</button>
+            <button class="cw-toggle-btn" data-val="vertical" onclick="cwSetToggle('cw_layout_fac',this)">↕️ List</button>
+            <button class="cw-toggle-btn" data-val="horizontal" onclick="cwSetToggle('cw_layout_fac',this)">↔️ Baris</button>
+          </div>
+        </div>
+        <div>
+          <div class="cw-label">🛏️ Layout Kamar</div>
+          <div id="cw_layout_room" class="cw-toggle-group">
+            <button class="cw-toggle-btn active" data-val="auto" onclick="cwSetToggle('cw_layout_room',this)">🔀 Auto</button>
+            <button class="cw-toggle-btn" data-val="vertical" onclick="cwSetToggle('cw_layout_room',this)">↕️ List</button>
+            <button class="cw-toggle-btn" data-val="horizontal" onclick="cwSetToggle('cw_layout_room',this)">↔️ Baris</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generate + Result -->
+    <div class="cw-card">
+      <div class="cw-section-title">📝 Hasil Caption</div>
+      <div id="cw_status" class="cw-status">⏳ Meracik caption...</div>
+      <div class="cw-result-wrap">
+        <textarea id="cw_result" class="cw-result" placeholder="Klik ✨ Generate Caption untuk membuat caption AI..."></textarea>
+      </div>
+      <div class="cw-result-actions">
+        <button class="btn-cw-gen" id="btn_cw_generate" onclick="runCopywriting()">✨ Generate Caption</button>
+        <button class="btn-cw-copy" id="btn_cw_copy" onclick="cwCopyResult()">📋 Copy</button>
+      </div>
+    </div>
+  </div><!-- /pane-cw -->
+</div><!-- /wrap -->
 
 <div id="toast"></div>
 
@@ -659,6 +874,8 @@ function render() {
 
   document.getElementById('content').innerHTML = html ||
     `<div class="empty"><div class="ico">🔎</div>Tidak ada hasil<small>Tidak ada akun di tab ini atau coba kata kunci lain</small></div>`;
+  // Tandai nama yang pernah disalin (bekas salin 12 jam)
+  markCopiedNames();
 }
 
 /* ── STATS ── */
@@ -814,14 +1031,70 @@ function copyOneId(el, id) {
 function copyName(el, name) {
   if (!name || name==='—') return;
   doCopy(name, () => {
-    const orig = el.innerHTML;
+    saveCopiedName(name);
     el.classList.add('copied'); el.textContent = '✅ Disalin';
     setTimeout(() => {
       el.classList.remove('copied');
+      el.classList.add('pernah-salin');
       el.innerHTML = hl(name, _search);
     }, 1200);
   });
   toast('✅ Nama grup disalin');
+}
+
+/* ── BEKAS SALIN — simpan & restore highlight 12 jam ── */
+const _COPIED_KEY = 'fewfeed_copied_names';
+const _COPIED_TTL = 12 * 60 * 60 * 1000; // 12 jam ms
+
+function _loadCopiedMap() {
+  try { return JSON.parse(localStorage.getItem(_COPIED_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function _saveCopiedMap(map) {
+  try { localStorage.setItem(_COPIED_KEY, JSON.stringify(map)); } catch(e) {}
+}
+function saveCopiedName(name) {
+  if (!name || name === '—') return;
+  const map = _loadCopiedMap();
+  map[name] = Date.now();
+  _saveCopiedMap(map);
+}
+function _cleanCopiedMap() {
+  const map = _loadCopiedMap();
+  const now = Date.now();
+  let changed = false;
+  Object.keys(map).forEach(k => {
+    if (now - map[k] > _COPIED_TTL) { delete map[k]; changed = true; }
+  });
+  if (changed) _saveCopiedMap(map);
+  return map;
+}
+function markCopiedNames() {
+  const map = _cleanCopiedMap();
+  const now = Date.now();
+  document.querySelectorAll('.g-name').forEach(el => {
+    const name = el.getAttribute('title') || '';
+    if (name && map[name] && (now - map[name]) <= _COPIED_TTL) {
+      if (!el.classList.contains('copied')) el.classList.add('pernah-salin');
+    } else {
+      el.classList.remove('pernah-salin');
+    }
+  });
+}
+function _scheduleAutoClean() {
+  const map = _loadCopiedMap();
+  const now = Date.now();
+  const soonest = Object.values(map).reduce((min, ts) => {
+    const rem = _COPIED_TTL - (now - ts);
+    return (rem > 0 && rem < min) ? rem : min;
+  }, Infinity);
+  if (soonest !== Infinity) {
+    setTimeout(() => {
+      _cleanCopiedMap();
+      markCopiedNames();
+      _scheduleAutoClean();
+    }, soonest + 500);
+  }
 }
 
 /* ── COPY LINK ── */
@@ -939,7 +1212,629 @@ async function doDeleteAkun(key, namaAkun, btn) {
 }
 
 /* ── INIT ── */
+_cleanCopiedMap();      // prune expired entries on load
+_scheduleAutoClean();   // schedule auto-clear when TTL expires
 loadAllGroups();
+
+/* ==========================================
+   OUTER TAB SWITCHER
+========================================== */
+function switchMainTab(tab) {
+  document.getElementById('pane-akun').style.display = tab === 'akun' ? '' : 'none';
+  document.getElementById('pane-cw').style.display   = tab === 'cw'   ? '' : 'none';
+  document.getElementById('main-tab-akun').classList.toggle('active', tab === 'akun');
+  document.getElementById('main-tab-cw').classList.toggle('active', tab === 'cw');
+}
+
+/* ==========================================
+   COPYWRITING — DATA & HELPERS
+========================================== */
+const CW_SECRET_KEYS = [
+  "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",
+  "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",
+  "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"
+];
+
+const CITY_DNA = {
+"bali": { landmarks: ["Kuta","Seminyak","Canggu","Ubud","Denpasar","Sanur","Nusa Dua","Sunset Road","Jimbaran","Bandara Ngurah Rai"] },
+"balikpapan": { landmarks: ["Bandara Sepinggan","MT Haryono","Klandasan","Balikpapan Baru","E-Walk","Pentacity","Lapangan Merdeka","Rapak","Gunung Bahagia","Pantai Kemala"] },
+"bandung": { landmarks: ["Pasteur","Stasiun Bandung","Dago","Setiabudi","Buah Batu","Soekarno Hatta","Cihampelas","Braga","ITB","UNPAD Dipatiukur"] },
+"banyuwangi": { landmarks: ["Kota Banyuwangi","Kawah Ijen","Rogojampi","Ketapang","Bandara Banyuwangi","Genteng","Pantai Boom","Srono","Gambiran","Pulau Merah"] },
+"batam": { landmarks: ["Batam Center","Nagoya","Jodoh","Sekupang","Bandara Hang Nadim","Barelang","Mega Mall","Nongsa","Batu Aji","Pelabuhan Batam Center"] },
+"batu": { landmarks: ["Alun-Alun Batu","Jatim Park","Museum Angkut","BNS","Selecta","Songgoriti","Oro-Oro Ombo","Coban Rondo","Paralayang","Junrejo"] },
+"bekasi": { landmarks: ["Summarecon","Grand Metropolitan","Stasiun Bekasi","Harapan Indah","Kalimalang","Jatiasih","Cikarang","MM2100","Lippo Cikarang","Tol Becakayu"] },
+"binjai": { landmarks: ["Binjai Kota","Tandem","Rambutan","Pasar Tavip","Soekarno Hatta","Binjai Supermall","Bandar Senembah","Selesai","Limau Mungkur","Tugu Binjai"] },
+"bitung": { landmarks: ["Pelabuhan Bitung","Girian","Madidir","Lembeh","Tangkoko","Pusat Kota Bitung","Kawasan Industri","Pantai Batu Putih","Aertembaga","Manembo-nembo"] },
+"blitar": { landmarks: ["Kanigoro","Sananwetan","Kepanjenkidul","Alun-Alun Blitar","Stasiun Blitar","Makam Bung Karno","Candi Penataran","Garum","Srengat","Wlingi"] },
+"bogor": { landmarks: ["Kebun Raya","Stasiun Bogor","Pajajaran","Yasmin","Sentul","Cibinong","Baranangsiang","Puncak","Dramaga IPB","Botani Square"] },
+"bojonegoro": { landmarks: ["Alun-Alun Bojonegoro","Stasiun Bojonegoro","Kapas","Dander","Sumberrejo","Padangan","Baureno","Kota Lama","Rajekwesi","Universitas Bojonegoro"] },
+"cianjur": { landmarks: ["Cipanas","Pacet","Cibodas","Karangtengah","Ciranjang","Alun-Alun Cianjur","UNSUR","Warungkondang","Sukaluyu","Haurwangi"] },
+"cilacap": { landmarks: ["Teluk Penyu","Stasiun Cilacap","Tanjung Intan","Majenang","Cipari","Sidareja","Widarapayung","Alun-Alun Cilacap","Kesugihan","Nusakambangan"] },
+"cirebon": { landmarks: ["Kejaksan","Stasiun Cirebon","Grage","CSB Mall","Kesambi","Gunungjati","Sumber","Weru","Plered","Sunyaragi"] },
+"depok": { landmarks: ["Margonda","Universitas Indonesia","Beji","Cinere","Sawangan","Depok Town Square","Margo City","Cimanggis","Juanda","Grand Depok City"] },
+"dieng": { landmarks: ["Dieng Plateau","Telaga Warna","Candi Arjuna","Sikunir","Prau Basecamp","Kawah Sikidang","Batur","Kejajar","Wonosobo Kota","Tambi"] },
+"garut": { landmarks: ["Tarogong","Cipanas","Garut Kota","Papandayan","Kadungora","Leles","Cibatu","Situ Bagendit","UNIGA","Malangbong"] },
+"indramayu": { landmarks: ["Indramayu Kota","Karangsong","Balongan","Jatibarang","Haurgeulis","Patrol","Losarang","Sukra","Alun-Alun Indramayu","PLTU Indramayu"] },
+"jakarta": { landmarks: ["Sudirman","Thamrin","Blok M","Kemang","Kelapa Gading","Grogol","Tanjung Duren","Mangga Dua","Tanah Abang","Bandara Soekarno Hatta"] },
+"jambi": { landmarks: ["Jambi Kota","Simpang Rimbo","Telanaipura","WTC Batanghari","Bandara Sultan Thaha","Muaro Jambi","Candi Muaro Jambi","Sipin","Thehok","Paal Merah"] },
+"jayapura": { landmarks: ["Abepura","Sentani","Waena","Jayapura Kota","Pantai Base G","Jembatan Youtefa","Uncen","Holtekamp","Entrop","Hamadi"] },
+"jember": { landmarks: ["Kampus UNEJ","Sumbersari","Kaliwates","Patrang","Alun-Alun Jember","Rambipuji","Arjasa","Tanggul","Ambulu","Bandara Notohadinegoro"] },
+"jepara": { landmarks: ["Jepara Kota","Tahunan","Mlonggo","Bandengan","Karimunjawa","UNISNU","Keling","Mayong","Welahan","Bangsri"] },
+"jombang": { landmarks: ["Jombang Kota","Tebuireng","Peterongan","Mojoagung","Diwek","UNWAHA","Ploso","Bandarkedungmulyo","Perak","Ringroad Jombang"] },
+"karawang": { landmarks: ["Karawang Barat","Karawang Timur","KIIC","Cikampek","Resinda Park","UNSIKA","Klari","Rengasdengklok","Tuparev","Tol Karawang"] },
+"kediri": { landmarks: ["Simpang Lima Gumul","Kediri Kota","Pare","Kampung Inggris","Bandara Dhoho","Mojoroto","Pesantren","Kediri Mall","Jalan Dhoho","Gurah"] },
+"kendal": { landmarks: ["Kendal Kota","Kawasan Industri Kendal","Weleri","Kaliwungu","Boja","Limbangan","Pegandon","Alun-Alun Kendal","Brangsong","Rowosari"] },
+"kendari": { landmarks: ["Kendari Kota","Mandonga","Poasia","Baruga","Universitas Halu Oleo","The Park Kendari","Bandara Haluoleo","Pantai Nambo","Wua-Wua","Anduonohu"] },
+"klaten": { landmarks: ["Klaten Kota","Delanggu","Prambanan","Jatinom","Ceper","Pedan","Umbul Ponggok","Rowo Jombor","Wedi","Manisrenggo"] },
+"kudus": { landmarks: ["Kudus Kota","Jati","Bae","Menara Kudus","UNMUR","Dawe","Colo Muria","Gebog","Jekulo","Mejobo"] },
+"kupang": { landmarks: ["Kupang Kota","Oebobo","Oesapa","Undana","Bandara El Tari","Tenau","Lasiana","Naikoten","Penfui","Kelapa Lima"] },
+"lampung": { landmarks: ["Bandar Lampung","Rajabasa","Kedaton","Way Halim","Universitas Lampung","Bandara Radin Inten","Teluk Betung","Enggal","Pahoman","Sukarame"] },
+"lembang": { landmarks: ["Alun-Alun Lembang","Floating Market","Farmhouse","Cikole","Grafika","Dusun Bambu","Tangkuban Perahu","Maribaya","Setiabudi","Bosscha"] },
+"magelang": { landmarks: ["Magelang Kota","Borobudur","Mendut","UNTIDAR","Artos Mall","Alun-Alun Magelang","Secang","Mungkid","Muntilan","Kyai Langgeng"] },
+"majalengka": { landmarks: ["Majalengka Kota","Kertajati","Bandara Kertajati","Cikijing","Talaga","Kadipaten","Panyaweuyan","Jatiwangi","Ciremai","UNMA"] },
+"makassar": { landmarks: ["Panakkukang","Losari","UNHAS","Alauddin","Bandara Hasanuddin","Pettarani","Rappocini","Tamalanrea","CPI","Trans Studio"] },
+"malang": { landmarks: ["Suhat","Kampus UB","Kampus UM","Ijen","Kayutangan","Dinoyo","Lowokwaru","Arjosari","MOG","Stasiun Kota Baru"] },
+"manado": { landmarks: ["Manado Kota","Malalayang","Boulevard","Megamas","UNSRAT","Bandara Sam Ratulangi","Bunaken","Wenang","Tikala","Mapanget"] },
+"mataram": { landmarks: ["Mataram Kota","Cakranegara","Ampenan","Universitas Mataram","Epicentrum Mall","Senggigi","Bandara Lombok","Pura Meru","Dasan Agung","Pagesangan"] },
+"medan": { landmarks: ["Medan Kota","USU","Ringroad","Setia Budi","Sun Plaza","Center Point","Kualanamu","Tembung","Amplas","Brayan"] },
+"mojokerto": { landmarks: ["Mojokerto Kota","Trowulan","Candi Tikus","Sunrise Mall","Sooko","Bangsal","Mojoanyar","Jalan Mojopahit","Alun-Alun Mojokerto","Kemlagi"] },
+"ngawi": { landmarks: ["Ngawi Kota","Benteng Van Den Bosch","Waduk Pondok","Geneng","Kedunggalar","Karangjati","Mantingan","Rest Area Ngawi","Paron","Gunung Lawu"] },
+"pacitan": { landmarks: ["Pacitan Kota","Pantai Klayar","Goa Gong","Teleng Ria","Watukarung","Arjosari","Donorojo","Nawangan","Museum SBY","Punung"] },
+"padang": { landmarks: ["Padang Kota","Air Tawar","UNAND","Pantai Padang","Siti Nurbaya","Lubuk Begalung","Khatib Sulaiman","Plaza Andalas","Minangkabau Airport","Tabing"] },
+"palembang": { landmarks: ["Ilir Barat","Ilir Timur","Jakabaring","Ampera","Universitas Sriwijaya","Palembang Icon","OPI Mall","Bandara SMB II","Sungai Musi","KM 5"] },
+"palu": { landmarks: ["Palu Barat","Palu Timur","Universitas Tadulako","Mall Tatura","Bandara Mutiara SIS","Talise","Tanjung Karang","Donggala","Biromaru","Nosarara"] },
+"pangandaran": { landmarks: ["Pantai Barat","Pantai Timur","Batu Karas","Green Canyon","Cijulang","Kalipucang","Parigi","Madasari","Citumang","Alun-Alun Pangandaran"] },
+"pati": { landmarks: ["Pati Kota","Juwana","Tayu","Kayen","Trangkil","Stadion Joyokusumo","Plaza Pragola","Gunung Muria","Margorejo","Batangan"] },
+"pekalongan": { landmarks: ["Pekalongan Kota","Kajen","Wiradesa","Batang","Museum Batik","Pantai Pasir Kencana","Stasiun Pekalongan","Setono","Jetayu","UNIKAL"] },
+"pekanbaru": { landmarks: ["Pekanbaru Kota","SKA Mall","Universitas Riau","Bandara Sultan Syarif Kasim","Panam","Arengka","MTQ","Living World","Rumbai","Simpang Tabek Gadang"] },
+"pematang siantar": { landmarks: ["Siantar Kota","Megaland","Universitas Simalungun","Parluasan","Rambung Merah","Jalan Sutomo","Siantar Plaza","Taman Hewan","Martoba","Sibolga Road"] },
+"pontianak": { landmarks: ["Pontianak Kota","Untan","Ayani","Supadio","Sungai Kapuas","Alun Kapuas","Siantan","Sungai Raya","Megamall","Tugu Khatulistiwa"] },
+"probolinggo": { landmarks: ["Probolinggo Kota","Bromo","Kraksaan","Mayangan","Dringu","Stadion Bayuangga","Pantai Bentar","Tongas","Paiton","Gending"] },
+"puncak": { landmarks: ["Puncak Pass","Taman Safari","Cisarua","Cipanas","Gunung Mas","Cilember","Villa Kota Bunga","Cibodas","Cisarua Safari","Megamendung"] },
+"purwakarta": { landmarks: ["Purwakarta Kota","Jatiluhur","Sadang","Gunung Parang","Situ Buleud","Bungursari","Cibatu","Campaka","Stasiun Purwakarta","Indorama"] },
+"purwokerto": { landmarks: ["Purwokerto Kota","UNSOED","Baturaden","Rita Supermall","Stasiun Purwokerto","Karanglewas","Sokaraja","Menara Teratai","Owabong","Gunung Slamet"] },
+"samarinda": { landmarks: ["Samarinda Kota","Universitas Mulawarman","Big Mall","Mahakam","Samarinda Square","APT Pranoto","Lembuswana","Tepian","Citra Niaga","Sungai Kunjang"] },
+"semarang": { landmarks: ["Simpang Lima","Tembalang UNDIP","Lawang Sewu","Kota Lama","Paragon Mall","Bandara Ahmad Yani","Banyumanik","Pedurungan","Tugu Muda","Ngaliyan"] },
+"sidoarjo": { landmarks: ["Sidoarjo Kota","Waru","Juanda","UMSIDA","Delta Sidoarjo","Candi Pari","Sun City","Taman Pinang","Gedangan","Buduran"] },
+"solo": { landmarks: ["Solo Kota","UNS","Stadion Manahan","Solo Paragon","Pasar Klewer","Laweyan","Palur","Colomadu","Kartasura","Stasiun Balapan"] },
+"subang": { landmarks: ["Subang Kota","Ciater","Pamanukan","Kalijati","Sari Ater","Ciasem","Pagaden","Pantai Pondok Bali","Capolaga","Jalan Otista"] },
+"sukabumi": { landmarks: ["Sukabumi Kota","Pelabuhan Ratu","Cisaat","Cibadak","Geopark Ciletuh","Situ Gunung","Gunung Gede","Alun-Alun Sukabumi","Stasiun Sukabumi","Warudoyong"] },
+"sumedang": { landmarks: ["Sumedang Kota","Jatinangor","UNPAD","Jatigede","Tampomas","Cimalaka","Tanjungsari","Ujungjaya","Alun-Alun Sumedang","Situ Cilembang"] },
+"surabaya": { landmarks: ["Gubeng","Tunjungan","Darmo","MERR","Pakuwon","Rungkut Industri","ITS","UNAIR","Wonokromo","Juanda"] },
+"tangerang": { landmarks: ["BSD","Alam Sutera","Gading Serpong","Bandara Soekarno Hatta","Karawaci","UPH","ICE BSD","TangCity","Ciledug","Cipondoh"] },
+"tanjung pinang": { landmarks: ["Tanjung Pinang Kota","Pulau Penyengat","UMRAH","Bandara RHF","Sri Bintan","Senggarang","Trikora","Bintan Center","Tugu Pensil","Sei Jang"] },
+"tasikmalaya": { landmarks: ["Tasik Kota","UNSIL","Asia Plaza","Dadaha","Cihideung","Indihiang","Singaparna","Galunggung","Cipatujah","Tamansari"] },
+"tawangmangu": { landmarks: ["Grojogan Sewu","Cemoro Sewu","Sarangan","Candi Sukuh","Candi Cetho","Bukit Mongkrang","Karangpandan","Ngargoyoso","Lawu Basecamp","Tawangmangu Center"] },
+"tegal": { landmarks: ["Tegal Kota","Stasiun Tegal","Pantai Alam Indah","Rita Park","Adipura","Slawi","Talang","Margadana","Pacific Mall","Surodadi"] },
+"tulungagung": { landmarks: ["Tulungagung Kota","Pantai Popoh","Ngunut","Rejoagung","Kedung Tumpang","Campurdarat","Gondang","Stadion Rejoagung","Kalidawir","Sendang"] },
+"yogyakarta": { landmarks: ["Malioboro","Tugu Jogja","UGM","Gejayan","Seturan","Jakal","Prawirotaman","Ringroad Utara","Stasiun Tugu","Bandara YIA"] }
+};
+
+const CW_BASE_FACILITIES = [
+  "AC Dingin","TV LED Digital","WiFi Super Ngebut","Air Mineral Gratis",
+  "Kamar Mandi Dalam","Parkir Luas Aman","Water Heater","Bebas Jam Malam","Handuk Bersih"
+];
+const CW_ROOM_VARIANTS = ["Standard Room","Twin Room","Family Room","Deluxe Room","Suite Room"];
+const CW_CONTEXT_EMOJI = {
+  ac:["❄️","🌬️","☃️","🧊","🥶"],tv:["📺","🖥️","🎞️","🎬"],
+  wifi:["📶","🚀","🌐","⚡","📲"],air:["🚰","💧","🥤","🧊"],
+  mandi:["🚿","🛁","🚽","🧼"],heater:["🔥","♨️","☀️","🚿"],
+  parkir:["🚗","🅿️","🚘","🏍️","🚙"],handuk:["🧖‍♂️","🧖‍♀️","🧴"],
+  jam:["🕒","🌙","⏳","🔓"],default:["✅","☑️","✔️","✨","🔸"]
+};
+const CW_GENERAL_EMOJI = {
+  headline:["✨","🔥","🏡","🏨","📌","✅","🛑","🏖️","🔞"],
+  price:["💰","💸","🏷️","💲","🤑","💵"],
+  contact:["📞","📲","☎️","📩","💬","🤙"],
+  location:["📍","📌","🗺️","🚩","🌏"]
+};
+
+const CW_PUNCHLINE_GENERIC = [
+  "🔥🔥🔥 PROMO MURAH HARI INI!!!!!!!!!!!",
+  "⚡ HARGA TERBAIK HARI INI, JANGAN KELEWATAN!!!!!",
+  "🚨 PROMO TERBATAS! BOOK SEKARANG SEBELUM HABIS!!!!!!",
+  "💥 PENAWARAN SPESIAL HARI INI ONLY!!!!!!!!!!!",
+  "🎯 HARGA GILA-GILAAN! JANGAN SAMPAI NYESEL!!!!!!!!",
+  "🔔 INFO PENTING BUAT YANG LAGI CARI PENGINAPAN MURAH!!!!!",
+  "🏷️ DISKON HARI INI! HARGA MULAI __PRICE__ SAJA!!!!!!!!!",
+  "🌟 SPESIAL HARI INI HARGA MULAI __PRICE__ SAJA!!!!!!!!!",
+  "😱 HARGA NGGA WARAS! MULAI __PRICE__ AJA DAPET KAMAR BAGUS!!!!!",
+  "💣 PROMO MELEDAK! MULAI __PRICE__ SAJA LANGSUNG BOOK!!!!!!!!",
+  "🎁 HARGA SPESIAL BUAT KAMU YANG LAGI BACA INI! MULAI __PRICE__!!!!!!!",
+  "🔑 KAMAR MASIH TERSEDIA! HARGA MULAI __PRICE__ CEK SEKARANG!!!!!!!",
+];
+const CW_PUNCHLINE_HOLIDAY = {
+  lebaran:[
+    "🌙🌙 SPESIAL LEBARAN! HARGA MULAI __PRICE__ SAJA!!!!!!!! BOOK SEKARANG!",
+    "🎊🎊 PROMO SPESIAL IDUL FITRI! HARGA HEMAT MULAI __PRICE__!!!!!!",
+    "🌙 LIBUR LEBARAN SERU BARENG KELUARGA! HARGA MULAI __PRICE__ AJA!!!!!!!",
+    "🕌 MOMEN LEBARAN MAKIN BERKESAN! STAYCATION MULAI __PRICE__ AJA!!!!!",
+    "🎉 SELAMAT HARI RAYA! RAYAKAN DI __KOTA__! HARGA MULAI __PRICE__!!!!!!!!",
+  ],
+  iduladha:[
+    "🐑 SPESIAL IDUL ADHA! HARGA MULAI __PRICE__ SAJA!!!!!!!! BOOK SEKARANG!",
+    "🎊 PROMO IDUL ADHA! STAYCATION HEMAT DI __KOTA__ MULAI __PRICE__!!!!!!",
+    "🕌 LIBUR IDUL ADHA? NGINEP DI __KOTA__ MULAI __PRICE__ AJA!!!!!!!!",
+  ],
+  tahunbaru:[
+    "🎆 PROMO TAHUN BARU! RAYAKAN DI __KOTA__! HARGA MULAI __PRICE__!!!!!!",
+    "🎉 WELCOME __NEXTYEAR__! HARGA SPESIAL TAHUN BARU MULAI __PRICE__ SAJA!!!!!!!!",
+    "🎇 MALAM TAHUN BARU DI __KOTA__! HARGA MULAI __PRICE__ SAJA!!!!!!!!!",
+  ],
+  natal:[
+    "🎄 PROMO NATAL! LIBURAN AKHIR TAHUN DI __KOTA__! HARGA MULAI __PRICE__!!!!!!",
+    "⛄ SPESIAL NATAL & TAHUN BARU! BOOK SEKARANG HARGA MULAI __PRICE__!!!!!",
+    "🎅 NATALAN DI __KOTA__ YUK! HARGA HEMAT MULAI __PRICE__ SAJA!!!!!!!!!!",
+  ],
+  kemerdekaan:[
+    "🇮🇩 SPESIAL HUT RI! RAYAKAN KEMERDEKAAN DI __KOTA__! HARGA MULAI __PRICE__!!!!!!",
+    "🎊 PROMO KEMERDEKAAN! HARGA MERAH PUTIH MULAI __PRICE__ SAJA!!!!!!!!",
+    "🇮🇩 17 AGUSTUS SPESIAL! STAYCATION MERDEKA MULAI __PRICE__!!!!!!!!!",
+  ],
+  libpanjang:[
+    "🏖️ LIBUR PANJANG ALERT! JANGAN SAMPAI KEHABISAN KAMAR! MULAI __PRICE__!!!!",
+    "🔥 LONG WEEKEND PROMO! HARGA SPESIAL MULAI __PRICE__ AJA!!!!!!!!",
+    "⚡ WEEKEND PANJANG NIH! BOOK SEKARANG SEBELUM PENUH! MULAI __PRICE__!!!!!!!",
+  ],
+  weekend:[
+    "🎉 WEEKEND VIBES! STAYCATION DI __KOTA__ MULAI __PRICE__!!!!!!",
+    "🔥 PROMO SABTU-MINGGU! HARGA HEMAT MULAI __PRICE__ SAJA!!!!!!!",
+    "🛌 WEEKEND TINGGAL SANTAI! KAMAR NYAMAN MULAI __PRICE__ SAJA!!!!!!!!",
+    "😎 WEEKEND IS HERE! BOOKING DULU SEBELUM KEHABISAN! MULAI __PRICE__!!!!!!!",
+  ],
+};
+
+function cwGetHolidayContext() {
+  const now=new Date(),m=now.getMonth()+1,d=now.getDate(),y=now.getFullYear(),dow=now.getDay();
+  const lebaranRanges=[{year:2025,sm:3,sd:25,em:4,ed:7},{year:2026,sm:3,sd:15,em:3,ed:30},{year:2027,sm:3,sd:5,em:3,ed:18}];
+  for(const lr of lebaranRanges){if(y===lr.year){const s=new Date(y,lr.sm-1,lr.sd),e=new Date(y,lr.em-1,lr.ed);if(now>=s&&now<=e)return'lebaran';}}
+  const adhaRanges=[{year:2025,sm:6,sd:3,em:6,ed:10},{year:2026,sm:5,sd:23,em:5,ed:30}];
+  for(const ar of adhaRanges){if(y===ar.year){const s=new Date(y,ar.sm-1,ar.sd),e=new Date(y,ar.em-1,ar.ed);if(now>=s&&now<=e)return'iduladha';}}
+  if(m===12&&d>=20&&d<=27)return'natal';
+  if((m===12&&d>=28)||(m===1&&d<=3))return'tahunbaru';
+  if(m===8&&d>=14&&d<=18)return'kemerdekaan';
+  if(dow===4||dow===5)return'libpanjang';
+  if(dow===0||dow===6)return'weekend';
+  return'generic';
+}
+function cwGeneratePunchline(city,price){
+  const ctx=cwGetHolidayContext(),cityUp=city.toUpperCase(),priceUp=price.toUpperCase(),nextYear=new Date().getFullYear()+1;
+  const pool=ctx==='generic'?CW_PUNCHLINE_GENERIC:(CW_PUNCHLINE_HOLIDAY[ctx]||CW_PUNCHLINE_GENERIC);
+  let line=pool[Math.floor(Math.random()*pool.length)];
+  return line.replace(/__PRICE__/g,priceUp).replace(/__KOTA__/g,cityUp).replace(/__NEXTYEAR__/g,nextYear);
+}
+function cwShuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function cwRandEmoji(type){const p=CW_GENERAL_EMOJI[type]||['✨'];return p[Math.floor(Math.random()*p.length)];}
+function cwCtxEmoji(text){
+  const l=text.toLowerCase();let p=CW_CONTEXT_EMOJI.default;
+  if(l.includes('ac'))p=CW_CONTEXT_EMOJI.ac;else if(l.includes('tv'))p=CW_CONTEXT_EMOJI.tv;
+  else if(l.includes('wifi'))p=CW_CONTEXT_EMOJI.wifi;else if(l.includes('air')||l.includes('mineral'))p=CW_CONTEXT_EMOJI.air;
+  else if(l.includes('mandi'))p=CW_CONTEXT_EMOJI.mandi;else if(l.includes('heater')||l.includes('panas'))p=CW_CONTEXT_EMOJI.heater;
+  else if(l.includes('parkir'))p=CW_CONTEXT_EMOJI.parkir;else if(l.includes('handuk'))p=CW_CONTEXT_EMOJI.handuk;
+  else if(l.includes('jam'))p=CW_CONTEXT_EMOJI.jam;
+  return p[Math.floor(Math.random()*p.length)];
+}
+function cwGetSmartLocation(inputCity){
+  const key=inputCity.toLowerCase().trim();let locations=[inputCity];
+  const sortedKeys=Object.keys(CITY_DNA).sort((a,b)=>b.length-a.length);
+  for(const ck of sortedKeys){if(key.includes(ck)){locations=CITY_DNA[ck].landmarks;break;}}
+  const count=Math.floor(Math.random()*2)+3;
+  return cwShuffle([...locations]).slice(0,count).join(', ')+', dll.';
+}
+function cwGetToggleVal(groupId){
+  const g=document.getElementById(groupId);if(!g)return'auto';
+  const a=g.querySelector('.cw-toggle-btn.active');return a?(a.getAttribute('data-val')||'auto'):'auto';
+}
+function cwSetToggle(groupId,btn){
+  document.getElementById(groupId).querySelectorAll('.cw-toggle-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function cwToggleCard(chkId,cardId,activeClass){
+  const chk=document.getElementById(chkId);
+  if(event&&event.target===chk)return;
+  chk.checked=!chk.checked;
+  document.getElementById(cardId).classList.toggle(activeClass,chk.checked);
+}
+
+/* Caption variant structures */
+const CW_CAPTION_VARIANTS = [
+  {id:'A',pricePos:'top',label:'Harga di atas, fasilitas di bawah',structure:(d)=>`
+${d.emHead} [JUDUL KAPITAL MENARIK TENTANG PENGINAPAN DI ${d.cityUp}]
+
+${d.emPrice} HARGA MULAI ${d.price} | BAYAR DI TEMPAT ✅ | TANPA DP
+
+[Kalimat pembuka singkat${d.npKata}]
+
+${d.emLoc} LOKASI DEKAT: ${d.location}
+
+FASILITAS:
+${d.facilities}
+
+PILIHAN KAMAR:
+${d.rooms}
+
+${d.emContact} BOOKING / INFO:
+📱 ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'B',pricePos:'mid',label:'Harga setelah lokasi',structure:(d)=>`
+${d.emHead} [JUDUL KAPITAL MENARIK PENGINAPAN DI ${d.cityUp}]
+
+[Kalimat pembuka singkat${d.npKata}]
+
+${d.emLoc} LOKASI: ${d.location}
+
+${d.emPrice} HARGA: Mulai ${d.price} | BAYAR DI TEMPAT | TANPA DP ✅
+
+FASILITAS:
+${d.facilities}
+
+PILIHAN KAMAR:
+${d.rooms}
+
+${d.emContact} HUBUNGI:
+📱 ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'C',pricePos:'bot',label:'Harga di bawah (standar)',structure:(d)=>`
+${d.emHead} [JUDUL KAPITAL MENARIK PENGINAPAN DI ${d.cityUp}]
+
+[Kalimat pembuka singkat${d.npKata}]
+
+${d.emLoc} LOKASI STRATEGIS: ${d.location}
+
+FASILITAS LENGKAP:
+${d.facilities}
+
+PILIHAN KAMAR:
+${d.rooms}
+
+${d.emPrice} HARGA: Mulai ${d.price} | BAYAR DI TEMPAT ✅
+💳 TANPA DP, BAYAR SAAT CHECK-IN
+
+${d.emContact} BOOKING SEKARANG:
+📱 ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'D',pricePos:'top',label:'Harga + bold style',structure:(d)=>`
+${d.emHead} PENGINAPAN ${d.cityUp} — HARGA MULAI ${d.price} ${d.emPrice}
+
+━━━━━━━━━━━━━━━━━━━
+[Kalimat pembuka menarik${d.npKata}]
+━━━━━━━━━━━━━━━━━━━
+
+${d.emLoc} LOKASI: ${d.location}
+
+📋 FASILITAS:
+${d.facilities}
+
+🛏️ TIPE KAMAR:
+${d.rooms}
+
+✅ CARA BOOKING:
+Screenshot → WA ke ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'E',pricePos:'mid',label:'Fasilitas duluan, harga di tengah',structure:(d)=>`
+${d.emHead} [JUDUL KAPITAL MENARIK PENGINAPAN ${d.cityUp}]
+
+[Kalimat pembuka${d.npKata}]
+
+FASILITAS UNGGULAN:
+${d.facilities}
+
+${d.emPrice} HARGA MULAI ${d.price} | BAYAR DI TEMPAT | TANPA DP ✅
+
+${d.emLoc} DEKAT: ${d.location}
+
+PILIHAN KAMAR:
+${d.rooms}
+
+BOOKING GAMPANG:
+${d.emContact} ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'F',pricePos:'bot',label:'Kamar + harga jadi satu di bawah',structure:(d)=>`
+${d.emHead} [JUDUL KAPITAL MENARIK PENGINAPAN DI ${d.cityUp}]
+
+[Kalimat pembuka singkat${d.npKata}]
+
+${d.emLoc} LOKASI: ${d.location}
+
+FASILITAS:
+${d.facilities}
+
+🛏️ KAMAR & HARGA:
+${d.rooms} — Mulai ${d.price} ${d.emPrice}
+💳 BAYAR DI TEMPAT | TANPA DP
+
+${d.emContact} CEK KETERSEDIAAN:
+📱 ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+];
+const CW_CAPTION_PLAIN = [
+  {id:'P1',pricePos:'top',label:'Plain - Harga di atas',structure:(d)=>`
+PENGINAPAN ${d.cityUp} | MULAI ${d.price} | BAYAR DI TEMPAT
+
+[Kalimat pembuka singkat tanpa emoji${d.npKata}]
+
+LOKASI: ${d.location}
+
+FASILITAS: ${d.facilities}
+
+TIPE KAMAR: ${d.rooms}
+
+BOOKING: ${d.phone}
+WHATSAPP: ${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'P2',pricePos:'bot',label:'Plain - Harga di bawah',structure:(d)=>`
+PENGINAPAN DI ${d.cityUp}
+
+[Kalimat pembuka singkat tanpa emoji${d.npKata}]
+
+LOKASI: ${d.location}
+
+FASILITAS:
+${d.facilities}
+
+TIPE KAMAR:
+${d.rooms}
+
+HARGA: Mulai ${d.price} | Bayar di tempat | Tanpa DP
+
+INFO & BOOKING:
+${d.phone}
+${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+  {id:'P3',pricePos:'mid',label:'Plain - Harga di tengah',structure:(d)=>`
+PENGINAPAN ${d.cityUp}
+
+[Kalimat pembuka${d.npKata}]
+
+LOKASI: ${d.location}
+HARGA: Mulai ${d.price} | Bayar di tempat | Tanpa DP
+
+FASILITAS:
+${d.facilities}
+
+TIPE KAMAR:
+${d.rooms}
+
+HUBUNGI:
+${d.phone}
+${d.waLink}
+
+[10-15 HASHTAG]
+
+@sorotan`},
+];
+const CW_CAPTION_SINGKAT = [
+  {id:'S1',pricePos:'top',label:'Singkat - Harga paling atas',structure:(d)=>`
+${d.emHead} PENGINAPAN ${d.cityUp} — MULAI ${d.price} ${d.emPrice}
+
+[1 kalimat inti${d.npKata}. Sebutkan BEBAS, AMAN, TANPA DP.]
+
+${d.emLoc} ${d.location}
+${d.facilities}
+${d.rooms}
+
+${d.emContact} ${d.phone} | ${d.waLink}
+
+[10-15 HASHTAG]
+@sorotan`},
+  {id:'S2',pricePos:'bot',label:'Singkat - Semua info ringkas',structure:(d)=>`
+${d.emHead} [JUDUL SINGKAT ${d.cityUp}]
+
+[1 kalimat inti${d.npKata}]
+
+${d.emLoc} ${d.location}
+${d.facilities}
+${d.rooms}
+${d.emPrice} Mulai ${d.price} | Bayar di tempat
+
+${d.emContact} ${d.phone}
+🔗 ${d.waLink}
+
+[10-15 HASHTAG]
+@sorotan`},
+  {id:'S3',pricePos:'top',label:'Singkat plain - tanpa hiasan',structure:(d)=>`
+PENGINAPAN ${d.cityUp} MULAI ${d.price}
+
+[1 kalimat inti${d.npKata}. BEBAS, AMAN, TANPA DP.]
+
+${d.location}
+${d.facilities}
+${d.rooms}
+
+${d.phone} | ${d.waLink}
+
+[10-15 HASHTAG]
+@sorotan`},
+];
+
+/* ==========================================
+   MAIN COPYWRITING FUNCTION
+========================================== */
+async function runCopywriting() {
+  const city = (document.getElementById('cw_kota_input').value || '').trim();
+  if (!city) { alert('⚠️ Isi nama kota dulu!'); return; }
+
+  const statusEl = document.getElementById('cw_status');
+  const btn = document.getElementById('btn_cw_generate');
+  btn.disabled = true;
+  statusEl.className = 'cw-status loading';
+  statusEl.textContent = '⏳ Meracik caption dengan AI...';
+
+  const accountType = document.getElementById('cw_admin').value;
+  const isNonPasutri = document.getElementById('cw_chk_np').checked;
+  const isPunchline  = document.getElementById('cw_chk_pl').checked;
+
+  let phone, waLink;
+  if (accountType === 'tiara') { phone = '0851-5543-4767'; waLink = 'wa.me/6285155434767'; }
+  else { phone = '0878-2805-8309'; waLink = 'wa.me/6287828058309'; }
+
+  const emHead    = cwRandEmoji('headline');
+  const emPrice   = cwRandEmoji('price');
+  const emContact = cwRandEmoji('contact');
+  const emLoc     = cwRandEmoji('location');
+
+  const locationData = cwGetSmartLocation(city);
+  const price = ['110rb-an','115rb-an','120rb-an','130rb-an'][Math.floor(Math.random()*4)];
+
+  const facLayout  = cwGetToggleVal('cw_layout_fac');
+  const roomLayout = cwGetToggleVal('cw_layout_room');
+  const modelGaya  = cwGetToggleVal('cw_model_gaya');
+
+  const isFacVert  = Math.random() < 0.6;
+  const isRoomVert = Math.random() < 0.5;
+  const useFacVert  = facLayout  === 'auto' ? isFacVert  : facLayout  === 'vertical';
+  const useRoomVert = roomLayout === 'auto' ? isRoomVert : roomLayout === 'vertical';
+
+  const facilitiesSource = (modelGaya === 'no_emoji' || modelGaya === 'singkat')
+    ? CW_BASE_FACILITIES
+    : CW_BASE_FACILITIES.map(item => `${cwCtxEmoji(item)} ${item}`);
+
+  const sep = [' • ',' | '][Math.floor(Math.random()*2)];
+  const facilitiesString = useFacVert ? facilitiesSource.join('\n') : facilitiesSource.join(sep);
+  const roomsString = useRoomVert
+    ? ((modelGaya === 'no_emoji' || modelGaya === 'singkat')
+        ? CW_ROOM_VARIANTS.map(r => `- ${r}`).join('\n')
+        : CW_ROOM_VARIANTS.map(r => `🛏️ ${r}`).join('\n'))
+    : CW_ROOM_VARIANTS.join(' • ');
+
+  let chosenVariant;
+  if (modelGaya === 'singkat') chosenVariant = CW_CAPTION_SINGKAT[Math.floor(Math.random()*CW_CAPTION_SINGKAT.length)];
+  else if (modelGaya === 'no_emoji') chosenVariant = CW_CAPTION_PLAIN[Math.floor(Math.random()*CW_CAPTION_PLAIN.length)];
+  else chosenVariant = CW_CAPTION_VARIANTS[Math.floor(Math.random()*CW_CAPTION_VARIANTS.length)];
+
+  const npKata = isNonPasutri ? ', menyebut NON PASUTRI / BEBAS PASANGAN' : '';
+  const cityUp = city.toUpperCase();
+  const useEmoji = (modelGaya !== 'no_emoji' && modelGaya !== 'singkat');
+
+  const variantData = {
+    emHead: useEmoji?emHead:'', emPrice: useEmoji?emPrice:'',
+    emContact: useEmoji?emContact:'', emLoc: useEmoji?emLoc:'',
+    cityUp, location: locationData,
+    price, phone, waLink,
+    facilities: facilitiesString, rooms: roomsString, npKata
+  };
+
+  const structureTemplate = chosenVariant.structure(variantData);
+  const punchlineLine = isPunchline ? cwGeneratePunchline(city, price) + '\n\n' : '';
+
+  const gayaInstruction = {
+    default:    'Gaya bebas kreatif, boleh pakai emoji sewajarnya, kalimat semangat & menarik.',
+    emoji_full: 'Gaya PENUH EMOJI di setiap baris/poin, setiap fasilitas & kamar wajib ada emoji relevan, judul besar & eye-catching.',
+    no_emoji:   '⛔ TANPA EMOJI SAMA SEKALI. Teks murni, profesional, langsung ke inti. JANGAN tambahkan emoji apapun.',
+    singkat:    '⚡ SINGKAT & PADAT. Maksimal 8 baris isi caption, langsung inti, tanpa basa-basi.',
+  }[modelGaya] || 'Gaya bebas kreatif.';
+
+  const prompt = `TUGAS: Buat Caption Iklan Penginapan di ${city}.
+VARIAN: ${chosenVariant.id} — ${chosenVariant.label}
+
+DATA FIX (JANGAN UBAH DATA & EMOJI INI):
+- Lokasi: ${locationData}
+- Fasilitas (JANGAN DIKURANGI, JANGAN UBAH EMOJI):
+${facilitiesString}
+- Kamar (TULIS SEMUA): ${roomsString}
+- Harga: Mulai ${price}
+- Kontak: ${phone} (Link: ${waLink})
+
+KEYWORD UTAMA (WAJIB ADA DI INTRO): "BEBAS", "AMAN", "TANPA DP".
+${isNonPasutri
+  ? 'TAMBAHAN KEYWORD WAJIB DI INTRO: "NON PASUTRI", "BEBAS PASANGAN".'
+  : '⛔ DILARANG KERAS: Jangan tulis kata "NON PASUTRI", "PASUTRI", "BEBAS PASANGAN". Caption harus netral.'}
+
+PUNCHLINE (sudah disiapkan, SALIN PERSIS di baris pertama jika ada):
+${isPunchline ? `"${punchlineLine.trim()}"` : '(Tidak ada punchline — langsung mulai dari judul)'}
+
+INSTRUKSI TAMPILAN:
+1. ${isPunchline ? '**PUNCHLINE**: Salin PERSIS baris punchline di atas sebagai baris pertama, lalu baris kosong, lalu judul.' : '**JUDUL**: Langsung mulai dari judul.'}
+2. **INTRO**: ${isNonPasutri ? 'WAJIB MENGANDUNG "NON PASUTRI" atau "BEBAS PASANGAN".' : 'Kalimat pembuka menarik dan ramah. JANGAN sebut NON PASUTRI.'}
+3. **MODEL GAYA (WAJIB DIIKUTI)**: ${gayaInstruction}
+4. **GAYA BAHASA**: To the point, jelas, tegas, semangat.
+5. **HASHTAG**: 10-15 hashtag DI ATAS "@sorotan".
+6. **WAJIB**: Akhiri dengan "@sorotan".
+7. **POSISI HARGA**: Ikuti varian ${chosenVariant.id} — harga di posisi "${chosenVariant.pricePos}".
+
+STRUKTUR OUTPUT (IKUTI PERSIS URUTAN INI):
+${structureTemplate}`;
+
+  try {
+    const apiKey = CW_SECRET_KEYS[Math.floor(Math.random()*CW_SECRET_KEYS.length)];
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 1.15,
+        max_tokens: 1100
+      })
+    });
+    const json = await res.json();
+    if (json.error) throw new Error(json.error.message);
+    let cleanText = json.choices[0].message.content.replace(/^"|"$/g, '');
+    if (!cleanText.includes('@sorotan')) cleanText += '\n\n@sorotan';
+    document.getElementById('cw_result').value = cleanText;
+    statusEl.className = 'cw-status ok';
+    statusEl.textContent = '✅ Caption berhasil dibuat! Varian: ' + chosenVariant.id + ' — ' + chosenVariant.label;
+  } catch(err) {
+    statusEl.className = 'cw-status error';
+    statusEl.textContent = '❌ Gagal: ' + err.message;
+    alert('Gagal generate caption: ' + err.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function cwCopyResult() {
+  const ta = document.getElementById('cw_result');
+  const btn = document.getElementById('btn_cw_copy');
+  if (!ta.value.trim()) { alert('Belum ada caption untuk dicopy!'); return; }
+  const doCopy = (text, cb) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(cb).catch(() => fbCopy(text,cb));
+    } else { fbCopy(text,cb); }
+  };
+  const fbCopy = (text, cb) => {
+    const t = document.createElement('textarea');
+    t.value = text; t.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+    document.body.appendChild(t); t.focus(); t.select();
+    try { document.execCommand('copy'); cb(); } catch(e) {}
+    document.body.removeChild(t);
+  };
+  doCopy(ta.value, () => {
+    btn.classList.add('copied'); btn.textContent = '✅ Disalin!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋 Copy'; }, 1800);
+  });
+}
+
 </script>
 </body>
 </html>
