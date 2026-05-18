@@ -648,6 +648,208 @@ body {
   font-size: 11px; font-weight: 700; color: #8a94a6;
 }
 
+
+/* ── DISBAN GROUP ITEM ── */
+.group-item.disban {
+  background: linear-gradient(90deg, #fff1f2 0%, #fff5f5 100%);
+  border-left: 3px solid #e53e3e !important;
+}
+.group-item.disban .g-name { color: #c53030; text-decoration: line-through; }
+.group-item.disban .g-id   { color: #fc8181; }
+.badge-disban {
+  display: inline;
+  background: #e53e3e; color: #fff;
+  font-size: 8px; font-weight: 900; padding: 1px 4px;
+  border-radius: 3px; letter-spacing: .04em;
+  vertical-align: middle; margin-right: 3px;
+}
+
+/* ── DBLCLICK POPUP ── */
+.dbl-modal {
+  background: #fff; border-radius: 16px; width: 100%; max-width: 340px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  overflow: hidden; animation: noteSlideIn .18s ease;
+}
+.dbl-head {
+  padding: 14px 16px 10px; border-bottom: 1px solid #e5e9f0;
+}
+.dbl-title { font-size: 13px; font-weight: 800; color: #1a1d27; margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dbl-sub   { font-size: 10px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; }
+.dbl-body  { padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.btn-dbl {
+  width: 100%; padding: 11px 14px; border-radius: 10px;
+  border: 1.5px solid #e5e9f0; background: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700;
+  color: #3a4060; cursor: pointer; text-align: left;
+  display: flex; align-items: center; gap: 9px; transition: all .15s;
+}
+.btn-dbl:hover { background: #f4f6fa; border-color: #c5cad8; }
+.btn-dbl.red  { border-color: #fed7d7; color: #c53030; background: #fff5f5; }
+.btn-dbl.red:hover  { background: #ffe3e3; border-color: #fc8181; }
+.btn-dbl.grey { border-color: #e5e9f0; color: #8a94a6; }
+.btn-dbl.grey:hover { background: #f0f2f8; }
+.btn-dbl-ico { font-size: 18px; flex-shrink: 0; }
+.btn-dbl-txt { display: flex; flex-direction: column; }
+.btn-dbl-lbl { font-size: 12px; font-weight: 700; }
+.btn-dbl-desc{ font-size: 10px; font-weight: 500; opacity: .7; }
+
+
+/* ── KELOLA GRUP CARD ── */
+.kelola-card {
+  background: #fff; border: 1px solid #e5e9f0; border-radius: 12px;
+  padding: 14px; margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.kelola-title {
+  font-size: 11px; font-weight: 800; color: #3a4060;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+}
+.kelola-search-wrap { position: relative; margin-bottom: 0; }
+.kelola-input {
+  width: 100%; padding: 9px 12px; border-radius: 8px;
+  border: 1.5px solid #e5e9f0; font-size: 13px; font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1d27;
+  background: #f8faff; transition: border .15s;
+}
+.kelola-input:focus { outline: none; border-color: #7c4fff; background: #fff; box-shadow: 0 0 0 3px #ede8ff; }
+.kelola-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: #fff; border: 1.5px solid #e5e9f0; border-radius: 10px;
+  max-height: 220px; overflow-y: auto; z-index: 300;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12); display: none;
+}
+.kelola-dropdown.open { display: block; }
+.kelola-option {
+  padding: 9px 12px; cursor: pointer; border-bottom: 1px solid #f0f2f8;
+  transition: background .1s;
+}
+.kelola-option:last-child { border-bottom: none; }
+.kelola-option:hover { background: #f4f0ff; }
+.kelola-opt-name { font-size: 12px; font-weight: 700; color: #1a1d27; }
+.kelola-opt-meta { font-size: 10px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; margin-top: 1px; }
+.kelola-opt-meta .disban-tag { background: #fed7d7; color: #c53030; padding: 1px 5px; border-radius: 4px; font-size: 9px; font-weight: 800; }
+
+/* Selected grup info */
+.kelola-selected {
+  margin-top: 10px; border-top: 1px solid #e5e9f0; padding-top: 10px;
+}
+.kelola-info { margin-bottom: 10px; }
+.kelola-info-name { font-size: 13px; font-weight: 800; color: #1a1d27; margin-bottom: 3px; }
+.kelola-info-meta { font-size: 10px; color: #8a94a6; font-family: 'JetBrains Mono', monospace; }
+.kelola-info-status { margin-top: 5px; display: flex; gap: 5px; flex-wrap: wrap; }
+.kelola-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 700;
+}
+.kelola-tag.jejak { background: #fff8e6; color: #c9960a; border: 1px solid #f5c842; }
+.kelola-tag.disban { background: #fff1f2; color: #c53030; border: 1px solid #fed7d7; }
+.kelola-tag.normal { background: #e8f8f0; color: #1db56a; border: 1px solid #b8e8ce; }
+
+/* Action buttons */
+.kelola-actions { display: flex; flex-direction: column; gap: 7px; }
+.kelola-btn {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border-radius: 10px; border: 1.5px solid #e5e9f0;
+  background: #fff; cursor: pointer; text-align: left; transition: all .15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.kelola-btn:hover { border-color: #c5cad8; background: #f4f6fa; }
+.kelola-btn > span:first-child { font-size: 18px; flex-shrink: 0; }
+.kelola-btn-txt { display: flex; flex-direction: column; }
+.kelola-btn-txt b  { font-size: 12px; font-weight: 700; color: #1a1d27; }
+.kelola-btn-txt small { font-size: 10px; color: #8a94a6; font-weight: 500; }
+.kelola-btn.jejak:hover  { border-color: #f5c842; background: #fff8e6; }
+.kelola-btn.disban  { border-color: #fed7d7; background: #fff5f5; }
+.kelola-btn.disban .kelola-btn-txt b { color: #c53030; }
+.kelola-btn.disban:hover { background: #ffe3e3; border-color: #fc8181; }
+.kelola-btn.batal-disban:hover { border-color: #b8e8ce; background: #e8f8f0; }
+.kelola-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+
+.kelola-hint {
+  font-size: 11px; color: #aab0c4; text-align: center;
+  padding: 8px 0 4px; font-style: italic;
+}
+.kelola-btn:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+
+
+/* ── AKSI GRUP di note modal ── */
+.note-modal-aksi {
+  padding: 0 16px 12px;
+  border-bottom: 1px solid #f0f2f8;
+}
+.note-aksi-label {
+  font-size: 9px; font-weight: 800; color: #aab0c4;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 7px;
+}
+.note-aksi-row { display: flex; gap: 6px; }
+.note-aksi-btn {
+  flex: 1; padding: 8px 4px; border-radius: 8px; border: 1.5px solid #e5e9f0;
+  background: #fff; cursor: pointer; font-size: 11px; font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif; color: #5a6280;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  transition: all .15s; line-height: 1.2;
+}
+.note-aksi-btn span { font-size: 9px; font-weight: 600; color: #8a94a6; }
+.note-aksi-btn:hover { background: #f4f6fa; border-color: #c5cad8; }
+.note-aksi-btn:disabled { opacity: .3; cursor: not-allowed; }
+.note-aksi-btn.disban { border-color: #fed7d7; background: #fff5f5; color: #c53030; }
+.note-aksi-btn.disban span { color: #fc8181; }
+.note-aksi-btn.disban:hover { background: #ffe3e3; }
+.note-aksi-btn.disban:disabled { opacity: .3; }
+
+
+/* ── SPLIT SCREEN ── */
+.btn-split {
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1.5px solid #e5e9f0; background: #fff;
+  font-size: 15px; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: all .15s; color: #8a94a6; flex-shrink: 0;
+}
+.btn-split:hover { border-color: #4f7cff; color: #4f7cff; background: #f0f4ff; }
+.btn-split.active { background: linear-gradient(135deg,#4f7cff,#7c4fff); color: #fff; border-color: transparent; }
+
+/* Wrap in split mode */
+body.split-mode .main-tabs-wrap { display: none !important; }
+body.split-mode .tabs-wrap { top: 53px !important; }
+
+body.split-mode .wrap {
+  display: flex !important; gap: 10px; align-items: flex-start;
+  max-width: 100%; padding: 10px 10px 50px;
+}
+body.split-mode #pane-akun,
+body.split-mode #pane-cw {
+  display: block !important;
+  flex: 1; min-width: 0;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  border: 1px solid #e5e9f0; border-radius: 12px;
+  background: #fff; padding: 10px;
+}
+body.split-mode #pane-catatan { display: none !important; }
+
+/* Scrollbar di split mode */
+body.split-mode #pane-akun::-webkit-scrollbar,
+body.split-mode #pane-cw::-webkit-scrollbar { width: 4px; }
+body.split-mode #pane-akun::-webkit-scrollbar-thumb,
+body.split-mode #pane-cw::-webkit-scrollbar-thumb { background: #d0d5e8; border-radius: 4px; }
+
+/* Label kolom di atas masing-masing pane */
+body.split-mode #pane-akun::before {
+  content: '📋 Daftar Akun'; display: block;
+  font-size: 10px; font-weight: 800; color: #8a94a6;
+  text-transform: uppercase; letter-spacing: .06em;
+  padding-bottom: 8px; border-bottom: 1px solid #e5e9f0; margin-bottom: 8px;
+}
+body.split-mode #pane-cw::before {
+  content: '✍️ Copywriting'; display: block;
+  font-size: 10px; font-weight: 800; color: #8a94a6;
+  text-transform: uppercase; letter-spacing: .06em;
+  padding-bottom: 8px; border-bottom: 1px solid #e5e9f0; margin-bottom: 8px;
+}
+
 </style>
 </head>
 <body>
@@ -661,6 +863,7 @@ body {
     </div>
   </div>
   <div class="topbar-right">
+    <button class="btn-split" id="btn-split" onclick="toggleSplit()" title="Split Screen">⊞</button>
     <button class="btn btn-ghost" id="export-btn" style="display:none" onclick="exportData()">⬇ JSON</button>
     <button class="btn btn-primary" id="load-btn" onclick="loadAllGroups()">↻ Refresh</button>
   </div>
@@ -793,6 +996,39 @@ body {
 
   <!-- PANE: CATATAN -->
   <div id="pane-catatan" style="display:none" class="catatan-wrap">
+
+    <!-- CARD: KELOLA GRUP -->
+    <div class="kelola-card" id="kelola-card">
+      <div class="kelola-title">🔧 Kelola Grup</div>
+      <div class="kelola-search-wrap">
+        <input type="text" id="kelola-input" class="kelola-input"
+          placeholder="Cari nama grup atau ID grup..."
+          oninput="kelolaSearch(this.value)"
+          autocomplete="off">
+        <div class="kelola-dropdown" id="kelola-dropdown"></div>
+      </div>
+      <div class="kelola-selected" id="kelola-selected">
+        <div class="kelola-info" id="kelola-info-box" style="display:none">
+          <div class="kelola-info-name" id="kelola-nama">—</div>
+          <div class="kelola-info-meta" id="kelola-meta">—</div>
+          <div class="kelola-info-status" id="kelola-status-row"></div>
+        </div>
+        <div class="kelola-hint" id="kelola-hint">⬆️ Cari dan pilih grup di atas untuk menggunakan aksi di bawah</div>
+        <div class="kelola-actions">
+          <button class="kelola-btn jejak" id="kelola-btn-jejak" onclick="kelolaAksiJejak()" disabled>
+            <span>🗑️</span><span class="kelola-btn-txt"><b>Batalkan Jejak</b><small>Hapus tanda kuning sudah disalin</small></span>
+          </button>
+          <button class="kelola-btn disban" id="kelola-btn-disban" onclick="kelolaAksiDisban()" disabled>
+            <span>🚫</span><span class="kelola-btn-txt"><b>Disban Grup</b><small>Tandai merah permanen sampai dibatalkan</small></span>
+          </button>
+          <button class="kelola-btn batal-disban" id="kelola-btn-batal" onclick="kelolaAksiBatal()" disabled>
+            <span>↩️</span><span class="kelola-btn-txt"><b>Batalkan Disban</b><small>Hapus status disban dari grup ini</small></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER CATATAN -->
     <div class="catatan-header">
       <span class="catatan-count" id="catatan-count">0 catatan</span>
     </div>
@@ -848,15 +1084,38 @@ function setStatus(msg, type) {
 }
 
 /* ── LOAD ── */
+async function _fbGet(path) {
+  const auth = FIREBASE_TOKEN ? '?auth=' + FIREBASE_TOKEN : '';
+  const res  = await fetch(FIREBASE_URL + path + '.json' + auth);
+  if (!res.ok) return {};
+  return (await res.json()) || {};
+}
+async function _fbSet(path, data) {
+  const auth = FIREBASE_TOKEN ? '?auth=' + FIREBASE_TOKEN : '';
+  await fetch(FIREBASE_URL + path + '.json' + auth, {
+    method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+}
+async function _fbDelete(path) {
+  const auth = FIREBASE_TOKEN ? '?auth=' + FIREBASE_TOKEN : '';
+  await fetch(FIREBASE_URL + path + '.json' + auth, { method: 'DELETE' });
+}
+
 async function loadAllGroups() {
   const btn = document.getElementById('load-btn');
   btn.disabled = true; btn.textContent = '⏳';
   setStatus('Memuat dari Firebase...', 'loading');
-  const auth = FIREBASE_TOKEN ? '?auth=' + FIREBASE_TOKEN : '';
   try {
-    const res = await fetch(FIREBASE_URL + '/fewfeed_groups.json' + auth);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const raw = await res.json();
+    const [raw, notes, disban] = await Promise.all([
+      _fbGet('/fewfeed_groups'),
+      _fbGet('/fewfeed_notes'),
+      _fbGet('/fewfeed_disban'),
+    ]);
+    _notesData  = notes  || {};
+    _disbanData = disban || {};
+    // Migrasi dari localStorage jika ada
+    _migrateLocalNotes();
     if (!raw || !Object.keys(raw).length) {
       setStatus('Belum ada data grup. Lakukan scan dulu.', 'error');
       document.getElementById('content').innerHTML =
@@ -870,6 +1129,7 @@ async function loadAllGroups() {
     document.getElementById('tabs-wrap').style.display = '';
     document.getElementById('export-btn').style.display = '';
     updateTabBadges();
+    renderCatatan();
     setStatus(Object.keys(raw).length + ' akun berhasil dimuat', 'ok');
   } catch(e) {
     setStatus('Gagal: ' + e.message, 'error');
@@ -992,12 +1252,15 @@ function render() {
         const nid  = 'nid_' + Math.random().toString(36).slice(2,8);
         const lid  = 'lid_' + Math.random().toString(36).slice(2,8);
 
-        const hasNote = _notesHasKey(sid);
-        html += `<div class="group-item">
+        const hasNote  = _notesHasKey(sid);
+        const isDisban = !!(_disbanData && _disbanData[sid]);
+        const nameHtml = isDisban
+          ? `<span class="badge-disban">DISBAN</span> ${hl(sname, kw)}`
+          : hl(sname, kw);
+        html += `<div class="group-item${isDisban?' disban':''}">
           <span class="g-num">${idx+1}</span>
           <span class="g-name" id="${nid}" title="${esc(sname)}"
-            onclick="copyName(this, '${esc(sname)}')"
-            ondblclick="removeCopiedMark(this, '${esc(sname)}')">${hl(sname, kw)}</span>
+            onclick="copyName(this, '${esc(sname)}', '${esc(c.city)}')">${nameHtml}</span>
           <button class="btn-note${hasNote?' has-note':''}" title="${hasNote?'Edit catatan':'Tambah catatan'}"
             onclick="openNoteModal('${esc(sid)}','${esc(sname)}','${esc(key)}','${esc(c.city)}','${fburl}')">✏️</button>
           <span class="g-id" id="${uid}"
@@ -1169,10 +1432,11 @@ function copyOneId(el, id) {
 }
 
 /* ── COPY NAMA GRUP ── */
-function copyName(el, name) {
+function copyName(el, name, city) {
   if (!name || name==='—') return;
   doCopy(name, () => {
     saveCopiedName(name);
+    if (city) localStorage.setItem('fewfeed_last_city', city);
     el.classList.add('copied'); el.textContent = '✅ Disalin';
     setTimeout(() => {
       el.classList.remove('copied');
@@ -1211,14 +1475,16 @@ function _cleanCopiedMap() {
   return map;
 }
 function removeCopiedMark(el, name) {
-  // Hapus dari localStorage
   const map = _loadCopiedMap();
-  if (map[name]) {
-    delete map[name];
-    _saveCopiedMap(map);
+  if (map[name]) { delete map[name]; _saveCopiedMap(map); }
+  // Hapus visual dari elemen yg diberikan atau cari lewat title
+  if (el) {
+    el.classList.remove('pernah-salin');
+  } else {
+    document.querySelectorAll('.g-name').forEach(e => {
+      if ((e.getAttribute('title')||'') === name) e.classList.remove('pernah-salin');
+    });
   }
-  // Hapus visual
-  el.classList.remove('pernah-salin');
 }
 
 function markCopiedNames() {
@@ -1365,20 +1631,32 @@ async function doDeleteAkun(key, namaAkun, btn) {
 
 
 /* ==========================================
-   CATATAN / NOTES SYSTEM
+   CATATAN / NOTES SYSTEM — Firebase
 ========================================== */
-const _NOTES_KEY = 'fewfeed_notes';
 
-function _loadNotes() {
-  try { return JSON.parse(localStorage.getItem(_NOTES_KEY) || '{}'); }
-  catch(e) { return {}; }
-}
-function _saveNotes(map) {
-  try { localStorage.setItem(_NOTES_KEY, JSON.stringify(map)); } catch(e) {}
-}
 function _notesHasKey(sid) {
-  const map = _loadNotes();
-  return !!(map[sid] && map[sid].note && map[sid].note.trim());
+  return !!(_notesData && _notesData[sid] && (_notesData[sid].note||'').trim());
+}
+
+// Migrasi catatan lama dari localStorage ke Firebase (jalankan sekali)
+async function _migrateLocalNotes() {
+  const LS_KEY = 'fewfeed_notes';
+  try {
+    const local = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+    const keys  = Object.keys(local);
+    if (!keys.length) return;
+    // Merge ke Firebase (hanya key yg belum ada)
+    const patch = {};
+    keys.forEach(k => {
+      if (!_notesData[k]) patch[k] = local[k];
+    });
+    if (Object.keys(patch).length) {
+      await _fbSet('/fewfeed_notes', patch);
+      Object.assign(_notesData, patch);
+    }
+    localStorage.removeItem(LS_KEY);
+    console.log('Notes migrated from localStorage to Firebase');
+  } catch(e) { /* silent */ }
 }
 
 // ── Modal state ──
@@ -1386,71 +1664,86 @@ let _noteCtx = { sid:'', sname:'', key:'', city:'', link:'' };
 
 function openNoteModal(sid, sname, akunKey, city, link) {
   _noteCtx = { sid, sname, akunKey, city, link };
-  const map = _loadNotes();
-  const existing = map[sid] ? map[sid].note || '' : '';
-
+  const existing = (_notesData[sid] && _notesData[sid].note) ? _notesData[sid].note : '';
   document.getElementById('note-modal-title').textContent = sname;
   document.getElementById('note-modal-sub').textContent   = '📍 ' + city + ' • ID: ' + sid;
   document.getElementById('note-textarea').value          = existing;
+  // Update state tombol aksi
+  const isDisban = !!(_disbanData && _disbanData[sid]);
+  const hasJejak = !!(_loadCopiedMap()[sname]);
+  document.getElementById('nm-btn-jejak').disabled  = !hasJejak;
+  document.getElementById('nm-btn-disban').disabled = isDisban;
+  document.getElementById('nm-btn-batal').disabled  = !isDisban;
   document.getElementById('note-overlay').classList.add('open');
   setTimeout(() => document.getElementById('note-textarea').focus(), 100);
+}
+
+function nmAksiJejak() {
+  removeCopiedMark(null, _noteCtx.sname);
+  document.getElementById('nm-btn-jejak').disabled = true;
+  toast('🗑 Jejak dihapus');
+}
+function nmAksiDisban() {
+  const { sid, sname, city, link } = _noteCtx;
+  const akunName = (_data[_noteCtx.akunKey] && _data[_noteCtx.akunKey].namaAkun) || _noteCtx.akunKey;
+  setDisban(sid, sname, city, akunName, link);
+  document.getElementById('nm-btn-disban').disabled = true;
+  document.getElementById('nm-btn-batal').disabled  = false;
+}
+function nmAksiBatal() {
+  cancelDisban(_noteCtx.sid);
+  document.getElementById('nm-btn-batal').disabled  = true;
+  document.getElementById('nm-btn-disban').disabled = false;
 }
 
 function closeNoteModal() {
   document.getElementById('note-overlay').classList.remove('open');
 }
 
-function saveNote() {
+async function saveNote() {
   const { sid, sname, akunKey, city, link } = _noteCtx;
   const note = document.getElementById('note-textarea').value.trim();
-  const map  = _loadNotes();
-
-  if (!note) {
-    // Jika kosong → hapus catatan
-    delete map[sid];
-    _saveNotes(map);
+  const btn  = document.querySelector('.btn-note-save');
+  btn.disabled = true; btn.textContent = '⏳ Menyimpan...';
+  try {
+    if (!note) {
+      // Kosong → hapus
+      delete _notesData[sid];
+      await _fbDelete('/fewfeed_notes/' + sid);
+      closeNoteModal();
+      _refreshNoteButtons(); renderCatatan();
+      toast('🗑 Catatan dihapus');
+      return;
+    }
+    const akunName = (_data[akunKey] && _data[akunKey].namaAkun) ? _data[akunKey].namaAkun : akunKey;
+    const entry = { note, sname, city, akunName, akunKey, link, updatedAt: Date.now() };
+    _notesData[sid] = entry;
+    await _fbSet('/fewfeed_notes', { [sid]: entry });
     closeNoteModal();
-    _refreshNoteButtons();
-    renderCatatan();
-    toast('🗑 Catatan dihapus');
-    return;
+    _refreshNoteButtons(); renderCatatan();
+    toast('✅ Catatan disimpan ke Firebase');
+  } catch(e) {
+    toast('❌ Gagal simpan: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '💾 Simpan Catatan';
   }
-
-  const akunName = (_data[akunKey] && _data[akunKey].namaAkun) ? _data[akunKey].namaAkun : akunKey;
-  map[sid] = {
-    note,
-    sname,
-    city,
-    akunName,
-    akunKey,
-    link,
-    updatedAt: Date.now()
-  };
-  _saveNotes(map);
-  closeNoteModal();
-  _refreshNoteButtons();
-  renderCatatan();
-  toast('✅ Catatan disimpan');
 }
 
-function deleteNote(sid) {
+async function deleteNote(sid) {
   if (!confirm('Hapus catatan ini?')) return;
-  const map = _loadNotes();
-  delete map[sid];
-  _saveNotes(map);
-  _refreshNoteButtons();
-  renderCatatan();
-  toast('🗑 Catatan dihapus');
+  try {
+    delete _notesData[sid];
+    await _fbDelete('/fewfeed_notes/' + sid);
+    _refreshNoteButtons(); renderCatatan();
+    toast('🗑 Catatan dihapus');
+  } catch(e) { toast('❌ Gagal hapus: ' + e.message); }
 }
 
-// Refresh .btn-note classes after save/delete without full re-render
 function _refreshNoteButtons() {
   document.querySelectorAll('.btn-note').forEach(btn => {
-    const onclick = btn.getAttribute('onclick') || '';
-    const m = onclick.match(/'([^']+)'/);
+    const m = (btn.getAttribute('onclick')||'').match(/'([^']+)'/);
     if (!m) return;
-    const sid = m[1];
-    const has = _notesHasKey(sid);
+    const has = _notesHasKey(m[1]);
     btn.classList.toggle('has-note', has);
     btn.title = has ? 'Edit catatan' : 'Tambah catatan';
   });
@@ -1458,15 +1751,13 @@ function _refreshNoteButtons() {
 
 // ── Render Catatan Table ──
 function renderCatatan() {
-  const map     = _loadNotes();
-  const entries = Object.entries(map)
+  const entries = Object.entries(_notesData)
     .filter(([,v]) => v && v.note)
     .sort((a,b) => (b[1].updatedAt||0) - (a[1].updatedAt||0));
 
   const countEl = document.getElementById('catatan-count');
   const contEl  = document.getElementById('catatan-content');
   if (!countEl || !contEl) return;
-
   countEl.textContent = entries.length + ' catatan';
 
   if (!entries.length) {
@@ -1477,33 +1768,27 @@ function renderCatatan() {
     </div>`;
     return;
   }
-
+  const e_ = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
   let rows = '';
   entries.forEach(([sid, v], i) => {
-    const link   = v.link || ('https://www.facebook.com/groups/' + sid);
-    const escN   = (s) => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    const link = v.link || ('https://www.facebook.com/groups/' + sid);
     rows += `<tr>
       <td class="ct-no">${i+1}</td>
-      <td class="ct-akun">${escN(v.akunName||'—')}</td>
-      <td class="ct-kota">${escN(v.city||'—')}</td>
-      <td class="ct-nama" title="Klik untuk copy link grup"
-          onclick="ctCopyLink(this,'${escN(link)}','${escN(v.sname||'—')}')">${escN(v.sname||'—')}</td>
-      <td class="ct-id">${escN(sid)}</td>
-      <td class="ct-cat">${escN(v.note||'')}</td>
-      <td class="ct-act"><button class="btn-del-note" title="Hapus catatan" onclick="deleteNote('${escN(sid)}')">🗑</button></td>
+      <td class="ct-akun">${e_(v.akunName||'—')}</td>
+      <td class="ct-kota">${e_(v.city||'—')}</td>
+      <td class="ct-nama" title="Klik untuk copy link"
+          onclick="ctCopyLink(this,'${e_(link)}','${e_(v.sname||'—')}')">${e_(v.sname||'—')}</td>
+      <td class="ct-id">${e_(sid)}</td>
+      <td class="ct-cat">${e_(v.note||'')}</td>
+      <td class="ct-act"><button class="btn-del-note" onclick="deleteNote('${e_(sid)}')">🗑</button></td>
     </tr>`;
   });
-
   contEl.innerHTML = `<div class="catatan-table-wrap">
     <table class="catatan-table">
       <thead><tr>
-        <th class="ct-no">#</th>
-        <th class="ct-akun">Akun</th>
-        <th class="ct-kota">Kota</th>
-        <th class="ct-nama">Nama Grup</th>
-        <th class="ct-id">ID Grup</th>
-        <th class="ct-cat">Catatan</th>
-        <th class="ct-act"></th>
+        <th class="ct-no">#</th><th class="ct-akun">Akun</th><th class="ct-kota">Kota</th>
+        <th class="ct-nama">Nama Grup</th><th class="ct-id">ID Grup</th>
+        <th class="ct-cat">Catatan</th><th class="ct-act"></th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>
@@ -1519,10 +1804,168 @@ function ctCopyLink(el, link, name) {
   toast('✅ Link grup ' + name + ' disalin');
 }
 
+/* ==========================================
+   DISBAN SYSTEM — Firebase
+========================================== */
+
+async function setDisban(sid, sname, city, akunName, link) {
+  try {
+    const entry = { sname, city, akunName, link, disbandedAt: Date.now() };
+    _disbanData[sid] = entry;
+    await _fbSet('/fewfeed_disban', { [sid]: entry });
+    render(); kelolaRefreshStatus();
+    toast('🚫 Grup ditandai DISBAN');
+  } catch(e) { toast('❌ Gagal: ' + e.message); }
+}
+
+async function cancelDisban(sid) {
+  try {
+    delete _disbanData[sid];
+    await _fbDelete('/fewfeed_disban/' + sid);
+    render(); kelolaRefreshStatus();
+    toast('✅ Status disban dibatalkan');
+  } catch(e) { toast('❌ Gagal: ' + e.message); }
+}
+
+/* ==========================================
+   KELOLA GRUP — search + aksi di tab catatan
+========================================== */
+let _kelolaCtx = null; // { sid, sname, city, akunName, akunKey, link }
+
+// Flatten semua grup dari _data menjadi array datar untuk pencarian
+function _kelolaFlatGroups() {
+  const list = [];
+  Object.entries(_data).forEach(([key, d]) => {
+    (d.cities || []).forEach(c => {
+      (c.groups || []).forEach(g => {
+        list.push({
+          sid:      g.id   || g.groupId || '',
+          sname:    g.name || g.groupName || '',
+          city:     c.city || '',
+          akunName: d.namaAkun || key,
+          akunKey:  key,
+          link:     g.fbUrl || g.link || ''
+        });
+      });
+    });
+  });
+  return list;
+}
+
+function kelolaSearch(val) {
+  const dd = document.getElementById('kelola-dropdown');
+  if (!val.trim() || !Object.keys(_data).length) {
+    dd.classList.remove('open'); dd.innerHTML = ''; return;
+  }
+  const q    = val.toLowerCase();
+  const list = _kelolaFlatGroups().filter(g =>
+    g.sname.toLowerCase().includes(q) || g.sid.includes(q)
+  ).slice(0, 10);
+
+  if (!list.length) {
+    dd.innerHTML = '<div class="kelola-option" style="color:#8a94a6;cursor:default">Tidak ditemukan</div>';
+    dd.classList.add('open'); return;
+  }
+  dd.innerHTML = list.map(g => {
+    const isDb = !!_disbanData[g.sid];
+    return `<div class="kelola-option" onclick="kelolaSelect(${JSON.stringify(g).replace(/"/g,'&quot;')})">
+      <div class="kelola-opt-name">${g.sname||'—'}</div>
+      <div class="kelola-opt-meta">${g.city} • ${g.sid}${isDb?' <span class="disban-tag">DISBAN</span>':''}</div>
+    </div>`;
+  }).join('');
+  dd.classList.add('open');
+}
+
+function kelolaSelect(g) {
+  _kelolaCtx = g;
+  document.getElementById('kelola-input').value = g.sname;
+  document.getElementById('kelola-dropdown').classList.remove('open');
+  document.getElementById('kelola-hint').style.display     = 'none';
+  document.getElementById('kelola-info-box').style.display = '';
+  document.getElementById('kelola-nama').textContent = g.sname || '—';
+  document.getElementById('kelola-meta').textContent = '📍 ' + g.city + ' • Akun: ' + g.akunName + ' • ID: ' + g.sid;
+  // Aktifkan semua tombol
+  ['kelola-btn-jejak','kelola-btn-disban','kelola-btn-batal'].forEach(id => {
+    document.getElementById(id).disabled = false;
+  });
+  kelolaRefreshStatus();
+}
+
+function kelolaRefreshStatus() {
+  if (!_kelolaCtx) return;
+  const { sid, sname } = _kelolaCtx;
+  const isDisban = !!(_disbanData[sid]);
+  const hasJejak = !!(_loadCopiedMap()[sname]);
+  const tags = [];
+  if (isDisban)  tags.push('<span class="kelola-tag disban">🚫 Disban</span>');
+  if (hasJejak)  tags.push('<span class="kelola-tag jejak">🟡 Ada Jejak</span>');
+  if (!isDisban && !hasJejak) tags.push('<span class="kelola-tag normal">✅ Normal</span>');
+  document.getElementById('kelola-status-row').innerHTML = tags.join('');
+
+  // Tombol Batalkan Jejak: aktif hanya jika ada jejak
+  document.getElementById('kelola-btn-jejak').disabled  = !hasJejak;
+  // Disban: aktif hanya jika belum disban
+  document.getElementById('kelola-btn-disban').disabled  = isDisban;
+  // Batal Disban: aktif hanya jika sudah disban
+  document.getElementById('kelola-btn-batal').disabled   = !isDisban;
+}
+
+function kelolaAksiJejak() {
+  if (!_kelolaCtx) return;
+  removeCopiedMark(null, _kelolaCtx.sname);
+  kelolaRefreshStatus();
+  toast('🗑 Jejak dihapus');
+}
+
+function kelolaAksiDisban() {
+  if (!_kelolaCtx) return;
+  const { sid, sname, city, akunName, link } = _kelolaCtx;
+  setDisban(sid, sname, city, akunName, link);
+}
+
+function kelolaAksiBatal() {
+  if (!_kelolaCtx) return;
+  cancelDisban(_kelolaCtx.sid);
+}
+
+// Tutup dropdown kalau klik di luar
+document.addEventListener('click', e => {
+  if (!e.target.closest('#kelola-card')) {
+    const dd = document.getElementById('kelola-dropdown');
+    if (dd) dd.classList.remove('open');
+  }
+});
+
+
+
+/* ── SPLIT SCREEN ── */
+let _splitMode = false;
+function toggleSplit() {
+  _splitMode = !_splitMode;
+  const btn = document.getElementById('btn-split');
+  if (_splitMode) {
+    document.body.classList.add('split-mode');
+    btn.classList.add('active'); btn.title = 'Keluar Split Screen';
+    // Pastikan kedua pane terlihat
+    document.getElementById('pane-akun').style.display = '';
+    document.getElementById('pane-cw').style.display   = '';
+    // Auto-fill kota jika ada
+    const lastCity = localStorage.getItem('fewfeed_last_city');
+    const inp = document.getElementById('cw_kota_input');
+    if (lastCity && !inp.value) inp.value = lastCity;
+  } else {
+    document.body.classList.remove('split-mode');
+    btn.classList.remove('active'); btn.title = 'Split Screen';
+    // Kembali ke tab terakhir aktif
+    const activeTab = document.getElementById('main-tab-akun').classList.contains('active') ? 'akun' : 'cw';
+    document.getElementById('pane-akun').style.display = activeTab === 'akun' ? '' : 'none';
+    document.getElementById('pane-cw').style.display   = activeTab === 'cw'   ? '' : 'none';
+  }
+}
+
 /* ── INIT ── */
 _cleanCopiedMap();      // prune expired entries on load
 _scheduleAutoClean();   // schedule auto-clear when TTL expires
-renderCatatan();         // render catatan from localStorage
 loadAllGroups();
 
 /* ==========================================
@@ -1530,14 +1973,43 @@ loadAllGroups();
 ========================================== */
 let _akunScrollY  = 0;
 let _akunSelValue = '';
+let _openAkun     = new Set();
+let _openCity     = new Set();
+
+function _saveOpenStates() {
+  _openAkun = new Set();
+  _openCity = new Set();
+  document.querySelectorAll('[id^="abody_"]').forEach(el => {
+    if (el.classList.contains('open')) _openAkun.add(el.id);
+  });
+  document.querySelectorAll('[id^="b_"]').forEach(el => {
+    if (el.classList.contains('open')) _openCity.add(el.id);
+  });
+}
+
+function _restoreOpenStates() {
+  _openAkun.forEach(id => {
+    const body = document.getElementById(id);
+    const hdr  = document.getElementById('ahdr_' + id);
+    if (body) body.classList.add('open');
+    if (hdr)  hdr.classList.add('open');
+  });
+  _openCity.forEach(id => {
+    const body = document.getElementById(id);
+    const hdr  = document.getElementById('hdr_' + id);
+    if (body) body.classList.add('open');
+    if (hdr)  hdr.classList.add('open');
+  });
+}
 
 function switchMainTab(tab) {
   const isNowAkun = document.getElementById('pane-akun').style.display !== 'none';
 
-  // Simpan posisi + filter sebelum pergi dari pane akun
+  // Simpan posisi, filter, dan state accordion sebelum pergi dari pane akun
   if (isNowAkun && tab !== 'akun') {
     _akunScrollY  = window.scrollY;
     _akunSelValue = document.getElementById('akun-sel').value;
+    _saveOpenStates();
   }
 
   document.getElementById('pane-akun').style.display    = tab === 'akun'    ? '' : 'none';
@@ -1556,14 +2028,21 @@ function switchMainTab(tab) {
     if (document.getElementById('toolbar').style.display !== 'none') {
       tw.style.display = '';
     }
-    // Pulihkan filter akun & scroll position
+    // Pulihkan filter akun, state accordion, dan scroll position
     document.getElementById('akun-sel').value = _akunSelValue;
     render(); updateStats();
+    _restoreOpenStates();
     requestAnimationFrame(() => window.scrollTo({ top: _akunScrollY, behavior: 'instant' }));
   }
 
   // Render catatan saat tab dibuka
   if (tab === 'catatan') renderCatatan();
+  // Auto-fill kota dari salinan terakhir
+  if (tab === 'cw') {
+    const lastCity = localStorage.getItem('fewfeed_last_city');
+    const inp = document.getElementById('cw_kota_input');
+    if (lastCity && !inp.value) inp.value = lastCity;
+  }
 }
 
 /* ==========================================
@@ -2187,12 +2666,27 @@ function cwCopyResult() {
     <div class="note-modal-body">
       <textarea class="note-textarea" id="note-textarea" placeholder="Tulis catatan untuk grup ini...&#10;Contoh: sudah posting 3x, engagement bagus, coba lagi besok..."></textarea>
     </div>
+    <div class="note-modal-aksi">
+      <div class="note-aksi-label">Aksi Grup</div>
+      <div class="note-aksi-row">
+        <button class="note-aksi-btn jejak" id="nm-btn-jejak" onclick="nmAksiJejak()">
+          🗑️ <span>Batalkan Jejak</span>
+        </button>
+        <button class="note-aksi-btn disban" id="nm-btn-disban" onclick="nmAksiDisban()">
+          🚫 <span>Disban Grup</span>
+        </button>
+        <button class="note-aksi-btn batal" id="nm-btn-batal" onclick="nmAksiBatal()">
+          ↩️ <span>Batalkan Disban</span>
+        </button>
+      </div>
+    </div>
     <div class="note-modal-foot">
       <button class="btn-note-back" onclick="closeNoteModal()">← Kembali</button>
       <button class="btn-note-save" onclick="saveNote()">💾 Simpan Catatan</button>
     </div>
   </div>
 </div>
+
 
 </body>
 </html>
